@@ -1,0 +1,40 @@
+PODS:
+  - Flutter (1.0.0)
+  - motiontag (0.0.1):
+    - Flutter
+    - MotionTagSDK (= 4.2.1)
+  - MotionTagSDK (4.2.1)
+  - "permission_handler (5.1.0+2)":
+    - Flutter
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - motiontag (from `.symlinks/plugins/motiontag/ios`)
+  - MotionTagSDK (from `https://github.com/MOTIONTAG/motiontag-sdk-ios-releases.git`, tag `v/4.2.1`)
+  - permission_handler (from `.symlinks/plugins/permission_handler/ios`)
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  motiontag:
+    :path: ".symlinks/plugins/motiontag/ios"
+  MotionTagSDK:
+    :git: https://github.com/MOTIONTAG/motiontag-sdk-ios-releases.git
+    :tag: v/4.2.1
+  permission_handler:
+    :path: ".symlinks/plugins/permission_handler/ios"
+
+CHECKOUT OPTIONS:
+  MotionTagSDK:
+    :git: https://github.com/MOTIONTAG/motiontag-sdk-ios-releases.git
+    :tag: v/4.2.1
+
+SPEC CHECKSUMS:
+  Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
+  motiontag: f9acd927bd8781adc9627d5b0dbfce5fe0cf6bab
+  MotionTagSDK: f580bf3ba46c3e96ea0a7e75d8be246fa9486ffc
+  permission_handler: ccb20a9fad0ee9b1314a52b70b76b473c5f8dab0
+
+PODFILE CHECKSUM: ffa7c10c33fbad21ac525b4f433db12fed5fa349
+
+COCOAPODS: 1.11.2
