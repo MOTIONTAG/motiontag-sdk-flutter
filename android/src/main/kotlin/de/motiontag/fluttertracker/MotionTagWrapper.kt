@@ -1,4 +1,4 @@
-package de.carmino.motiontag
+package de.motiontag.fluttertracker
 
 import android.app.Application
 import de.motiontag.tracker.MotionTag

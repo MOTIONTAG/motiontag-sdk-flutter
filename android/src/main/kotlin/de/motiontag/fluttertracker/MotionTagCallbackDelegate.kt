@@ -1,4 +1,4 @@
-package de.carmino.motiontag
+package de.motiontag.fluttertracker
 
 import de.motiontag.tracker.Event
 import de.motiontag.tracker.MotionTag

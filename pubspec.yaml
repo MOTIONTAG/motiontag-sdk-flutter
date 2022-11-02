@@ -32,7 +32,7 @@ flutter:
   plugin:
     platforms:
       android:
-        package: de.carmino.motiontag
+        package: de.motiontag.fluttertracker
         pluginClass: MotionTagPlugin # TODO: Rename it
       ios:
         pluginClass: MotionTagPlugin # TODO: Rename it

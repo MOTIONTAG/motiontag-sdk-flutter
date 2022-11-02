@@ -6,7 +6,7 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.os.Build
 import androidx.core.app.NotificationCompat
-import de.carmino.motiontag.MotionTagWrapper
+import de.motiontag.fluttertracker.MotionTagWrapper
 
 private const val MOTIONTAG_IS_WIFI_ONLY_DATA_TRANSFER = true
 private const val NOTIFICATION_CHANNEL_ID = "motiontag"

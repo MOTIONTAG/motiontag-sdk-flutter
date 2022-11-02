@@ -1,13 +1,7 @@
-package de.carmino.motiontag
+package de.motiontag.fluttertracker
 
 import android.app.Application
-import android.app.Notification
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.content.Context.NOTIFICATION_SERVICE
-import android.os.Build
 import androidx.annotation.NonNull
-import androidx.core.app.NotificationCompat
 import de.motiontag.tracker.Event
 import de.motiontag.tracker.MotionTag
 

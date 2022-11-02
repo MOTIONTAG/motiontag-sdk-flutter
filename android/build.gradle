@@ -1,5 +1,5 @@
-group 'de.carmino.motiontag'
-version '0.0.1'
+group 'de.motiontag.fluttertracker'
+version '1.0.0'
 
 buildscript {
     ext.kotlin_version = '1.5.20'
