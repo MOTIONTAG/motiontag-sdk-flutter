@@ -1,0 +1,9 @@
+steps:
+
+  - task: FlutterInstall@0
+    displayName: 'Install Flutter'
+    inputs:
+      mode: 'auto'
+      channel: 'stable'
+      version: 'custom'
+      customVersion: '3.3.6'

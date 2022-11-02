@@ -22,18 +22,28 @@ stages:
         timeoutInMinutes: 60
         steps:
 
-          - script: |
-              flutter format --set-exit-if-changed .
-            displayName: 'format'
+          - template: templates/prepare-machine.yml
 
-          - script: |
-              flutter analyze
-            displayName: 'analyze'
+          - task: FlutterCommand@0
+            displayName: 'Format code'
+            inputs:
+              arguments: 'format --set-exit-if-changed .'
+              projectDirectory: '.'
 
-          - script: |
-              flutter test --coverage
-            displayName: 'test plugin'
+          - task: FlutterCommand@0
+            displayName: 'Analyze code'
+            inputs:
+              arguments: 'analyze'
+              projectDirectory: '.'
 
-          - script: |
-              (cd example; flutter test)
-            displayName: 'test example'
+          - task: FlutterCommand@0
+            displayName: 'Test plugin'
+            inputs:
+              arguments: 'test --coverage'
+              projectDirectory: '.'
+
+          - task: FlutterCommand@0
+            displayName: 'Test example'
+            inputs:
+              arguments: 'test --coverage'
+              projectDirectory: 'example'
