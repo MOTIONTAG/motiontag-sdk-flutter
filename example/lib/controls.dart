@@ -17,13 +17,15 @@ class Controls extends StatefulWidget {
 class _ControlsState extends State<Controls> {
   static final _motionTag = MotionTag.instance;
 
-  Future<void> _executeInteraction({required String logMessage, required AsyncCallback function}) async {
+  Future<void> _executeInteraction(
+      {required String logMessage, required AsyncCallback function}) async {
     Logs.print('$logMessage...');
     try {
       await function();
       Logs.print('$logMessage DONE');
     } catch (error, stackTrace) {
-      Logs.print('$logMessage ERROR. See the console logs for details', error: error, stackTrace: stackTrace);
+      Logs.print('$logMessage ERROR. See the console logs for details',
+          error: error, stackTrace: stackTrace);
     }
 
     Status.of(context).refresh();
@@ -49,7 +51,9 @@ class _ControlsState extends State<Controls> {
         function: () => _motionTag.clearData(),
       );
 
-  void _requestPermission({required String name, required Permission permission}) => _executeInteraction(
+  void _requestPermission(
+          {required String name, required Permission permission}) =>
+      _executeInteraction(
         logMessage: 'Requesting $name permission',
         function: () async {
           final permissionStatus = await permission.request();
@@ -65,7 +69,7 @@ class _ControlsState extends State<Controls> {
         name: 'location (in use)',
         permission: Permission.locationWhenInUse,
       );
-  void _onRequestLocationAlwasPermission() => _requestPermission(
+  void _onRequestLocationAlwaysPermission() => _requestPermission(
         name: 'location (always)',
         permission: Permission.locationAlways,
       );
@@ -82,9 +86,10 @@ class _ControlsState extends State<Controls> {
       onStart: _onStart,
       onStop: _onStop,
       onClearData: _onClearData,
-      onRequestActivityRecognitionPermission: _onRequestActivityRecognitionPermission,
+      onRequestActivityRecognitionPermission:
+          _onRequestActivityRecognitionPermission,
       onRequestLocationInUsePermission: _onRequestLocationInUsePermission,
-      onRequestLocationAlwasPermission: _onRequestLocationAlwasPermission,
+      onRequestLocationAlwasPermission: _onRequestLocationAlwaysPermission,
       onRequestMotionSensorPermission: _onRequestMotionSensorPermission,
     );
   }

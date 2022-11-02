@@ -108,13 +108,15 @@ class MotionTag {
           _observer?.call(MotionTagEvent(MotionTagEventType.started));
         }
         // Simulate a MotionTagEventType.stopped event on Android to match the iOS behavior
-        else if (Platform.isAndroid && event.type == MotionTagEventType.autoStop) {
+        else if (Platform.isAndroid &&
+            event.type == MotionTagEventType.autoStop) {
           _observer?.call(MotionTagEvent(MotionTagEventType.stopped));
         }
     }
   }
 
-  void setObserver(void Function(MotionTagEvent event)? observer) => _observer = observer;
+  void setObserver(void Function(MotionTagEvent event)? observer) =>
+      _observer = observer;
 
   /// Retrieves the current user token or `null` if not specified yet.
   Future<String?> getUserToken() async {
@@ -140,7 +142,9 @@ class MotionTag {
 
     // Simulate a MotionTagEventType.started event on Android to match the iOS behavior (MotionTagEventType.autoStart
     // would not occur in this case)
-    if (Platform.isAndroid && !isTrackingActiveBefore && await isTrackingActive()) {
+    if (Platform.isAndroid &&
+        !isTrackingActiveBefore &&
+        await isTrackingActive()) {
       _observer?.call(MotionTagEvent(MotionTagEventType.started));
     }
   }
@@ -153,7 +157,9 @@ class MotionTag {
 
     // Simulate a MotionTagEventType.stopped event on Android to match the iOS behavior (MotionTagEventType.autoStop
     // would not occur in this case)
-    if (Platform.isAndroid && isTrackingActiveBefore && !await isTrackingActive()) {
+    if (Platform.isAndroid &&
+        isTrackingActiveBefore &&
+        !await isTrackingActive()) {
       _observer?.call(MotionTagEvent(MotionTagEventType.stopped));
     }
   }
