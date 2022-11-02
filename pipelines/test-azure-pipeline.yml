@@ -31,6 +31,12 @@ stages:
               projectDirectory: '.'
 
           - task: FlutterCommand@0
+            displayName: 'Analyze code'
+            inputs:
+              arguments: 'analyze'
+              projectDirectory: '.'
+
+          - task: FlutterCommand@0
             displayName: 'Test plugin'
             inputs:
               arguments: 'test --coverage'
@@ -41,9 +47,3 @@ stages:
             inputs:
               arguments: 'test --coverage'
               projectDirectory: 'example'
-
-          - task: FlutterCommand@0
-            displayName: 'Analyze code'
-            inputs:
-              arguments: 'analyze'
-              projectDirectory: '.'
