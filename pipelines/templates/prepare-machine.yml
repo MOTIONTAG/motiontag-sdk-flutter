@@ -10,6 +10,6 @@ steps:
 
   - task: FlutterCommand@0
     displayName: 'Get dependencies'
-      inputs:
-        arguments: 'pub get'
-        projectDirectory: '.'
+    inputs:
+      arguments: 'pub get'
+      projectDirectory: '.'
