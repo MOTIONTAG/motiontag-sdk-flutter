@@ -57,8 +57,7 @@ class StatusState extends State<Status> {
     return Column(
       children: [
         StatusProperty('userToken', _userToken, isLoading: isLoading),
-        StatusProperty('isTrackingActive',
-            _isTrackingActive != null ? _isTrackingActive.toString() : null,
+        StatusProperty('isTrackingActive', _isTrackingActive?.toString(),
             isLoading: isLoading),
       ],
     );

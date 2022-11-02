@@ -1,0 +1,39 @@
+# Build, lint and test all targets
+
+trigger:
+  branches:
+    include:
+      - master
+pr:
+  autoCancel: true
+  branches:
+    include:
+      - '*'
+
+variables:
+  - template: templates/common-variables.yml
+
+stages:
+  - stage: LintAndTest
+    pool:
+      vmImage: ${{variables.vmImage}}
+    jobs:
+      - job: Lint_And_Test
+        timeoutInMinutes: 60
+        steps:
+
+          - script: |
+              flutter format --set-exit-if-changed .
+            displayName: 'format'
+
+          - script: |
+              flutter analyze
+            displayName: 'analyze'
+
+          - script: |
+              flutter test --coverage
+            displayName: 'test plugin'
+
+          - script: |
+              (cd example; flutter test)
+            displayName: 'test example'

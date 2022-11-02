@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 
 class Logs extends StatefulWidget {
   static const logName = 'Example App';
-  static final _globalKey = GlobalKey<_LogsState>(debugLabel: 'Logs');
+  static final _globalKey = GlobalKey<LogsState>(debugLabel: 'Logs');
 
   Logs() : super(key: _globalKey);
 
@@ -21,10 +21,10 @@ class Logs extends StatefulWidget {
   }
 
   @override
-  _LogsState createState() => _LogsState();
+  LogsState createState() => LogsState();
 }
 
-class _LogsState extends State<Logs> {
+class LogsState extends State<Logs> {
   final ScrollController _scrollController = ScrollController();
   String _logs = "";
 

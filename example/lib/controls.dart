@@ -11,10 +11,10 @@ class Controls extends StatefulWidget {
   Controls({Key? key}) : super(key: key);
 
   @override
-  _ControlsState createState() => _ControlsState();
+  ControlsState createState() => ControlsState();
 }
 
-class _ControlsState extends State<Controls> {
+class ControlsState extends State<Controls> {
   static final _motionTag = MotionTag.instance;
 
   Future<void> _executeInteraction(

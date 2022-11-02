@@ -1,0 +1,5 @@
+# Common variables
+
+variables:
+  - name: vmImage
+    value: 'macos-12'
