@@ -1,4 +1,4 @@
-package de.carmino.motiontag_example
+package de.motiontag.motiontag_example
 
 import io.flutter.embedding.android.FlutterActivity
 

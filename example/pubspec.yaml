@@ -1,5 +1,5 @@
 name: motiontag_example
-description: Demonstrates how to use the MOTIONTAG SDK plugin.
+description: Demonstrates how to use the Flutter MOTIONTAG SDK Plugin.
 version: 1.0.0+1
 homepage: https://github.com/MOTIONTAG/motiontag-sdk-flutter#readme
 repository: https://github.com/MOTIONTAG/motiontag-sdk-flutter

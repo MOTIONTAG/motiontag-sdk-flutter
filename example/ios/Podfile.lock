@@ -1,6 +1,8 @@
 PODS:
   - Flutter (1.0.0)
-  - motiontag (0.0.1):
+  - integration_test (0.0.1):
+    - Flutter
+  - motiontag (1.0.0):
     - Flutter
     - MotionTagSDK (= 4.2.1)
   - MotionTagSDK (4.2.1)
@@ -9,6 +11,7 @@ PODS:
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
+  - integration_test (from `.symlinks/plugins/integration_test/ios`)
   - motiontag (from `.symlinks/plugins/motiontag/ios`)
   - MotionTagSDK (from `https://github.com/MOTIONTAG/motiontag-sdk-ios-releases.git`, tag `v/4.2.1`)
   - permission_handler (from `.symlinks/plugins/permission_handler/ios`)
@@ -16,6 +19,8 @@ DEPENDENCIES:
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
+  integration_test:
+    :path: ".symlinks/plugins/integration_test/ios"
   motiontag:
     :path: ".symlinks/plugins/motiontag/ios"
   MotionTagSDK:
@@ -31,7 +36,8 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
-  motiontag: f9acd927bd8781adc9627d5b0dbfce5fe0cf6bab
+  integration_test: a1e7d09bd98eca2fc37aefd79d4f41ad37bdbbe5
+  motiontag: e00ee665616017b28e86735debe7bc2bb8cf69f0
   MotionTagSDK: f580bf3ba46c3e96ea0a7e75d8be246fa9486ffc
   permission_handler: ccb20a9fad0ee9b1314a52b70b76b473c5f8dab0
 

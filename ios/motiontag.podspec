@@ -4,14 +4,14 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'motiontag'
-  s.version          = '0.0.1'
-  s.summary          = 'Flutter wrapper for the MotionTag SDK'
+  s.version          = '1.0.0'
+  s.summary          = 'Flutter wrapper for the MOTIONTAG SDK'
   s.description      = <<-DESC
 Flutter wrapper for the MotionTag SDK
                        DESC
-  s.homepage         = 'https://github.com/carmino-app/flutter-motiontag#readme'
+  s.homepage         = 'https://github.com/MOTIONTAG/motiontag-sdk-flutter#readme'
   s.license          = { :file => '../LICENSE' }
-  s.author           = { 'New Path Solutions GmbH' => 'dev@carmino.de' }
+  s.author           = { 'MOTIONTAG GmbH' => 'info@motion-tag.com' }
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'

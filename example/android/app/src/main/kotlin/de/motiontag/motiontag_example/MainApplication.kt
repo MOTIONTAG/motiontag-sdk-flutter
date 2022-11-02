@@ -1,4 +1,4 @@
-package de.carmino.motiontag_example
+package de.motiontag.motiontag_example
 
 import android.app.Application
 import android.app.Notification
