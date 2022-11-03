@@ -7,3 +7,9 @@ steps:
       channel: 'stable'
       version: 'custom'
       customVersion: '3.3.6'
+
+  - task: FlutterCommand@0
+    displayName: 'Get dependencies'
+    inputs:
+      arguments: 'pub get'
+      projectDirectory: '.'

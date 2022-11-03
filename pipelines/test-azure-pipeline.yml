@@ -3,7 +3,7 @@
 trigger:
   branches:
     include:
-      - master
+      - main
 pr:
   autoCancel: true
   branches:
@@ -14,12 +14,12 @@ variables:
   - template: templates/common-variables.yml
 
 stages:
-  - stage: LintAndTest
+  - stage: MainStage
     pool:
       vmImage: ${{variables.vmImage}}
     jobs:
       - job: Lint_And_Test
-        timeoutInMinutes: 60
+        timeoutInMinutes: 30
         steps:
 
           - template: templates/prepare-machine.yml
@@ -43,7 +43,13 @@ stages:
               projectDirectory: '.'
 
           - task: FlutterCommand@0
-            displayName: 'Test example'
+            displayName: 'Test example app'
             inputs:
               arguments: 'test --coverage'
+              projectDirectory: 'example'
+
+          - task: FlutterCommand@0
+            displayName: 'Build example app'
+            inputs:
+              arguments: 'build appbundle'
               projectDirectory: 'example'
