@@ -49,13 +49,7 @@ stages:
               projectDirectory: 'example'
 
           - task: FlutterCommand@0
-            displayName: 'Build Android app'
+            displayName: 'Build example app'
             inputs:
               arguments: 'build appbundle'
-              projectDirectory: 'example'
-
-          - task: FlutterCommand@0
-            displayName: 'Build iOS app'
-            inputs:
-              arguments: 'build ios --debug'
               projectDirectory: 'example'
