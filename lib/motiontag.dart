@@ -35,7 +35,6 @@ class MotionTag {
     }
   }
 
-  // TODO: Test it
   /// Registers observer to receive [MotionTagEvent]
   void setObserver(void Function(MotionTagEvent event)? observer) =>
       _observer = observer;

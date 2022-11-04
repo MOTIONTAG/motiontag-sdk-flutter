@@ -8,6 +8,7 @@ import 'channel_mock.dart';
 void main() {
   final defaultTimeout = Timeout(Duration(seconds: 5));
   final channelMock = ChannelMock('de.motiontag.tracker');
+  var motionTag = MotionTag.instance;
 
   setUp(() {
     channelMock.reset();
@@ -17,7 +18,7 @@ void main() {
       (tester) async {
     channelMock.mockMethod('getUserToken', returnValues: ['some_user_token']);
 
-    final userToken = await MotionTag.instance.getUserToken();
+    final userToken = await motionTag.getUserToken();
 
     var calls = channelMock.methodCalls;
     expect(calls.length, 1);
@@ -29,7 +30,7 @@ void main() {
       (tester) async {
     channelMock.mockMethod('setUserToken');
 
-    await MotionTag.instance.setUserToken('new_user_token');
+    await motionTag.setUserToken('new_user_token');
 
     var calls = channelMock.methodCalls;
     expect(calls.length, 1);
@@ -41,7 +42,7 @@ void main() {
     channelMock.mockMethod('isTrackingActive', returnValues: [true]);
     channelMock.mockMethod('start');
 
-    await MotionTag.instance.start();
+    await motionTag.start();
 
     var calls = channelMock.methodCalls;
     expect(calls.length, 2);
@@ -56,8 +57,8 @@ void main() {
     channelMock.mockMethod('start');
 
     List<MotionTagEvent> events = [];
-    MotionTag.instance.setObserver((event) => events.add(event));
-    await MotionTag.instance.start();
+    motionTag.setObserver((event) => events.add(event));
+    await motionTag.start();
 
     expect(events.length, 1);
     expect(events.first.type, MotionTagEventType.started);
@@ -73,8 +74,8 @@ void main() {
     channelMock.mockMethod('start');
 
     List<MotionTagEvent> events = [];
-    MotionTag.instance.setObserver((event) => events.add(event));
-    await MotionTag.instance.start();
+    motionTag.setObserver((event) => events.add(event));
+    await motionTag.start();
 
     expect(events.length, 0);
 
