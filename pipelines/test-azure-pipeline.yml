@@ -53,3 +53,13 @@ stages:
             inputs:
               arguments: 'build appbundle'
               projectDirectory: 'example'
+
+          - script: |
+              genhtml coverage/lcov.info -o coverage/html
+            displayName: 'Prepare plugin test coverage'
+
+          - task: PublishPipelineArtifact@1
+            displayName: 'Publish plugin test coverage'
+            inputs:
+              targetPath: $(System.DefaultWorkingDirectory)/coverage/html
+              artifactName: PluginTestCoverage
