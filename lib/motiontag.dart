@@ -1,14 +1,18 @@
 import 'dart:async';
-import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:motiontag/motiontag_events.dart';
 
+// TODO: Update method description comments
 class MotionTag {
   static final instance = MotionTag._();
 
   final MethodChannel _channel = const MethodChannel('de.motiontag.tracker');
   void Function(MotionTagEvent event)? _observer;
+
+  bool get _isAndroid => defaultTargetPlatform == TargetPlatform.android;
+  bool get _isIOS => defaultTargetPlatform == TargetPlatform.iOS;
 
   MotionTag._() {
     _channel.setMethodCallHandler(_methodCallHandler);
@@ -21,17 +25,17 @@ class MotionTag {
         _observer?.call(event);
 
         // Simulate a MotionTagEventType.started event on Android to match the iOS behavior
-        if (Platform.isAndroid && event.type == MotionTagEventType.autoStart) {
+        if (_isAndroid && event.type == MotionTagEventType.autoStart) {
           _observer?.call(MotionTagEvent(MotionTagEventType.started));
         }
         // Simulate a MotionTagEventType.stopped event on Android to match the iOS behavior
-        else if (Platform.isAndroid &&
-            event.type == MotionTagEventType.autoStop) {
+        else if (_isAndroid && event.type == MotionTagEventType.autoStop) {
           _observer?.call(MotionTagEvent(MotionTagEventType.stopped));
         }
     }
   }
 
+  // TODO: Test it
   /// Registers observer to receive [MotionTagEvent]
   void setObserver(void Function(MotionTagEvent event)? observer) =>
       _observer = observer;
@@ -51,8 +55,7 @@ class MotionTag {
 
   /// Starts tracking.
   ///
-  /// On Android it throws an IllegalStateException exception if no user token is specified. The callback submitted to
-  /// [initialize] will be called to inform about SDK state changes or relevant tracking events.
+  /// The callback submitted to [initialize] will be called to inform about SDK state changes or relevant tracking events.
   Future<void> start() async {
     final isTrackingActiveBefore = await isTrackingActive();
 
@@ -60,9 +63,7 @@ class MotionTag {
 
     // Simulate a MotionTagEventType.started event on Android to match the iOS behavior (MotionTagEventType.autoStart
     // would not occur in this case)
-    if (Platform.isAndroid &&
-        !isTrackingActiveBefore &&
-        await isTrackingActive()) {
+    if (_isAndroid && !isTrackingActiveBefore && await isTrackingActive()) {
       _observer?.call(MotionTagEvent(MotionTagEventType.started));
     }
   }
@@ -75,9 +76,7 @@ class MotionTag {
 
     // Simulate a MotionTagEventType.stopped event on Android to match the iOS behavior (MotionTagEventType.autoStop
     // would not occur in this case)
-    if (Platform.isAndroid &&
-        isTrackingActiveBefore &&
-        !await isTrackingActive()) {
+    if (_isAndroid && isTrackingActiveBefore && !await isTrackingActive()) {
       _observer?.call(MotionTagEvent(MotionTagEventType.stopped));
     }
   }
