@@ -14,8 +14,7 @@ void main() {
     channelMock.reset();
   });
 
-  testWidgets('calling getUserToken should return value using channel',
-      (tester) async {
+  testWidgets('getUserToken should return value using channel', (tester) async {
     channelMock.mockMethod('getUserToken', returnValues: ['some_user_token']);
 
     final userToken = await motionTag.getUserToken();
@@ -26,8 +25,7 @@ void main() {
     expect(userToken, 'some_user_token');
   }, timeout: defaultTimeout);
 
-  testWidgets('calling setUserToken should set value using channel',
-      (tester) async {
+  testWidgets('setUserToken should set value using channel', (tester) async {
     channelMock.mockMethod('setUserToken');
 
     await motionTag.setUserToken('new_user_token');
@@ -38,7 +36,7 @@ void main() {
     expect(calls.first.arguments['userToken'], 'new_user_token');
   }, timeout: defaultTimeout);
 
-  testWidgets('calling start should use channel', (tester) async {
+  testWidgets('start should use channel', (tester) async {
     channelMock.mockMethod('isTrackingActive', returnValues: [true]);
     channelMock.mockMethod('start');
 
@@ -62,7 +60,6 @@ void main() {
 
     expect(events.length, 1);
     expect(events.first.type, MotionTagEventType.started);
-
     debugDefaultTargetPlatformOverride = null;
   }, timeout: defaultTimeout);
 
@@ -78,7 +75,85 @@ void main() {
     await motionTag.start();
 
     expect(events.length, 0);
-
     debugDefaultTargetPlatformOverride = null;
+  }, timeout: defaultTimeout);
+
+  testWidgets('start should not callback event if was active and is Android',
+      (tester) async {
+    debugDefaultTargetPlatformOverride = TargetPlatform.iOS;
+    channelMock.mockMethod('isTrackingActive', returnValues: [true, false]);
+    channelMock.mockMethod('start');
+
+    List<MotionTagEvent> events = [];
+    motionTag.setObserver((event) => events.add(event));
+    await motionTag.start();
+
+    expect(events.length, 0);
+    debugDefaultTargetPlatformOverride = null;
+  }, timeout: defaultTimeout);
+
+  testWidgets('stop should callback event if was active and is Android',
+      (tester) async {
+    debugDefaultTargetPlatformOverride = TargetPlatform.android;
+    channelMock.mockMethod('isTrackingActive', returnValues: [true, false]);
+    channelMock.mockMethod('stop');
+
+    List<MotionTagEvent> events = [];
+    motionTag.setObserver((event) => events.add(event));
+    await motionTag.stop();
+
+    expect(events.length, 1);
+    expect(events.first.type, MotionTagEventType.stopped);
+    debugDefaultTargetPlatformOverride = null;
+  }, timeout: defaultTimeout);
+
+  testWidgets('stop should not callback event if was active and is not Android',
+      (tester) async {
+    debugDefaultTargetPlatformOverride = TargetPlatform.iOS;
+    channelMock.mockMethod('isTrackingActive', returnValues: [true, false]);
+    channelMock.mockMethod('stop');
+
+    List<MotionTagEvent> events = [];
+    motionTag.setObserver((event) => events.add(event));
+    await motionTag.stop();
+
+    expect(events.length, 0);
+    debugDefaultTargetPlatformOverride = null;
+  }, timeout: defaultTimeout);
+
+  testWidgets('stop should not callback event if was not active and is Android',
+      (tester) async {
+    debugDefaultTargetPlatformOverride = TargetPlatform.iOS;
+    channelMock.mockMethod('isTrackingActive', returnValues: [false, true]);
+    channelMock.mockMethod('stop');
+
+    List<MotionTagEvent> events = [];
+    motionTag.setObserver((event) => events.add(event));
+    await motionTag.stop();
+
+    expect(events.length, 0);
+    debugDefaultTargetPlatformOverride = null;
+  }, timeout: defaultTimeout);
+
+  testWidgets('clearData should use channel', (tester) async {
+    channelMock.mockMethod('clearData');
+
+    await motionTag.clearData();
+
+    var calls = channelMock.methodCalls;
+    expect(calls.length, 1);
+    expect(calls.first.method, 'clearData');
+  }, timeout: defaultTimeout);
+
+  testWidgets('isTrackingActive should return value using channel',
+      (tester) async {
+    channelMock.mockMethod('isTrackingActive', returnValues: [true]);
+
+    final isTrackingActive = await motionTag.isTrackingActive();
+
+    var calls = channelMock.methodCalls;
+    expect(calls.length, 1);
+    expect(calls.first.method, 'isTrackingActive');
+    expect(isTrackingActive, true);
   }, timeout: defaultTimeout);
 }
