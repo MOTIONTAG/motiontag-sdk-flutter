@@ -2,14 +2,12 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/services.dart';
-
-import 'motiontag_events.dart';
+import 'package:motiontag/motiontag_events.dart';
 
 class MotionTag {
   static final instance = MotionTag._();
 
-  final MethodChannel _channel = const MethodChannel('motiontag');
-
+  final MethodChannel _channel = const MethodChannel('de.motiontag.tracker');
   void Function(MotionTagEvent event)? _observer;
 
   MotionTag._() {
@@ -34,6 +32,7 @@ class MotionTag {
     }
   }
 
+  /// Registers observer to receive [MotionTagEvent]
   void setObserver(void Function(MotionTagEvent event)? observer) =>
       _observer = observer;
 
