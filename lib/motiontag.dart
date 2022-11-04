@@ -12,7 +12,6 @@ class MotionTag {
   void Function(MotionTagEvent event)? _observer;
 
   bool get _isAndroid => defaultTargetPlatform == TargetPlatform.android;
-  bool get _isIOS => defaultTargetPlatform == TargetPlatform.iOS;
 
   MotionTag._() {
     _channel.setMethodCallHandler(_methodCallHandler);
