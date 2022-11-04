@@ -25,7 +25,7 @@ stages:
           - template: templates/prepare-machine.yml
 
           - task: FlutterCommand@0
-            displayName: 'Format code'
+            displayName: 'Check code format'
             inputs:
               arguments: 'format --set-exit-if-changed .'
               projectDirectory: '.'
@@ -56,10 +56,10 @@ stages:
 
           - script: |
               genhtml coverage/lcov.info -o coverage/html
-            displayName: 'Prepare plugin test coverage'
+            displayName: 'Prepare plugin coverage'
 
           - task: PublishPipelineArtifact@1
-            displayName: 'Publish plugin test coverage'
+            displayName: 'Publish plugin coverage'
             inputs:
               targetPath: $(System.DefaultWorkingDirectory)/coverage/html
               artifactName: PluginTestCoverage
