@@ -75,10 +75,13 @@ class MotionTagEvent {
   MotionTagEvent(this.type);
 
   factory MotionTagEvent.parseMap(dynamic map) {
-    final String typeString = map['type'];
+    final String? typeString = map['type'];
+    if (typeString == null) {
+      throw ArgumentError('Could not find type key when parsing event');
+    }
     var event = _motionTagEventTypeFromString[typeString];
     if (event == null) {
-      throw Exception('Could not parse unknown $typeString event');
+      throw ArgumentError('Could not parse unknown $typeString event type');
     }
     return MotionTagEvent(event);
   }
