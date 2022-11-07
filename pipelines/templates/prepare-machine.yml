@@ -1,9 +1,5 @@
 steps:
 
-  - script: |
-      brew install lcov
-    displayName: 'Install lcov'
-
   - task: FlutterInstall@0
     displayName: 'Install Flutter'
     inputs:
