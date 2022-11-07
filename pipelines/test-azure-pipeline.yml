@@ -37,16 +37,10 @@ stages:
               projectDirectory: '.'
 
           - task: FlutterCommand@0
-            displayName: 'Test plugin'
+            displayName: 'Unit tests'
             inputs:
               arguments: 'test --coverage'
               projectDirectory: '.'
-
-          - task: FlutterCommand@0
-            displayName: 'Test example app'
-            inputs:
-              arguments: 'test --coverage'
-              projectDirectory: 'example'
 
           - task: FlutterCommand@0
             displayName: 'Build example app'
