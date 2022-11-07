@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:motiontag/motiontag.dart';
@@ -131,13 +129,13 @@ class ControlsLayout extends StatelessWidget {
           spacing: 20,
           alignment: WrapAlignment.center,
           children: [
-            if (Platform.isAndroid)
+            if (defaultTargetPlatform == TargetPlatform.android)
               ActionButton(
                 enabled: interactionEnabled,
                 text: 'Activity recognition',
                 onPressed: onRequestActivityRecognitionPermission,
               ),
-            if (Platform.isIOS)
+            if (defaultTargetPlatform == TargetPlatform.iOS)
               ActionButton(
                 enabled: interactionEnabled,
                 text: 'Motion sensor',
