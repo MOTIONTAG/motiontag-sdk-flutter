@@ -56,11 +56,6 @@ stages:
               targetPath: $(System.DefaultWorkingDirectory)/coverage/html
               artifactName: PluginTestCoverage
 
-          # TODO: Remove it
-          - script: |
-              which flutter
-            displayName: 'Which flutter'
-
           - bash: '$(System.DefaultWorkingDirectory)/pipelines/scripts/init-android-emulator.sh'
             displayName: 'Init Emulator'
 
