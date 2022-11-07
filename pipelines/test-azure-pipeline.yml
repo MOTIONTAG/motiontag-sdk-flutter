@@ -65,16 +65,16 @@ stages:
           - bash: '$(System.DefaultWorkingDirectory)/pipelines/scripts/init-android-emulator.sh'
             displayName: 'Init Emulator'
 
+          - script: |
+              brew tap mobile-dev-inc/tap 
+              brew install maestro
+            displayName: 'Install Maestro'
+
           - task: FlutterCommand@0
             displayName: 'Install Android app'
             inputs:
               arguments: 'install'
               projectDirectory: 'example'
-
-          - script: |
-              brew tap mobile-dev-inc/tap 
-              brew install maestro
-            displayName: 'Install Maestro'
 
           - script: |
               maestro test pipelines/maestro/android-test-flow.yml
