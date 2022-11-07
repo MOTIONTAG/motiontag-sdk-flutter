@@ -24,11 +24,6 @@ stages:
 
           - template: templates/prepare-machine.yml
 
-          # TODO: Remove it
-          - script: |
-              flutter --help
-            displayName: 'flutter Help'
-
           - task: FlutterCommand@0
             displayName: 'Check code format'
             inputs:
