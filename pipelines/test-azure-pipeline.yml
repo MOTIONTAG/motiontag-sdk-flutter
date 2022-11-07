@@ -57,27 +57,7 @@ stages:
               artifactName: PluginTestCoverage
 
           - task: FlutterCommand@0
-            displayName: 'Build Android app'
+            displayName: 'Build app'
             inputs:
               arguments: 'build apk --debug'
               projectDirectory: 'example'
-
-          - bash: '$(System.DefaultWorkingDirectory)/pipelines/scripts/init-android-emulator.sh'
-            displayName: 'Init Emulator'
-
-          - script: |
-              brew tap mobile-dev-inc/tap 
-              brew install maestro
-            displayName: 'Install Maestro'
-
-          - task: FlutterCommand@0
-            displayName: 'Install Android app'
-            inputs:
-              arguments: 'install'
-              projectDirectory: 'example'
-
-          - script: |
-              maestro test pipelines/maestro/android-test-flow.yml
-            displayName: 'Android integration tests'
-
-          # TODO: Implement iOS integration tests
