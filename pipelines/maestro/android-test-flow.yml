@@ -25,7 +25,7 @@ appId: de.motiontag.motiontag_example
 
 # Grant Location (in use) permission
 - tapOn:
-    text: "TODO Location (in use)"
+    text: "Location (in use)"
 - tapOn:
     text: "While using the app"
     optional: true

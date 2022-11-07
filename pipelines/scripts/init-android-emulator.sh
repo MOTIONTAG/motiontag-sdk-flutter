@@ -7,7 +7,7 @@ echo "no" | "$ANDROID_HOME"/cmdline-tools/latest/bin/avdmanager -v create avd -n
 "$ANDROID_HOME"/emulator/emulator -list-avds
 
 echo -e "\nStarting emulator and waiting for boot to complete..."
-nohup "$ANDROID_HOME"/emulator/emulator -avd android_emulator -no-audio -no-boot-anim -camera-back none -camera-front none -qemu -m 2048 > /dev/null 2>&1 &
+nohup "$ANDROID_HOME"/emulator/emulator -avd android_emulator -no-boot-anim -qemu -m 2048 > /dev/null 2>&1 &
 $ANDROID_HOME/platform-tools/adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed | tr -d '\r') ]]; do sleep 1; done; input keyevent 82'
 
 echo "Emulator has finished booting!"
