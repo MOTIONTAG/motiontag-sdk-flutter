@@ -17,6 +17,11 @@ void main() {
         false);
   });
 
+  test('should print formatted text event', () {
+    expect(MotionTagEvent(MotionTagEventType.started).toString(),
+        "MotionTagEvent(type: started)");
+  });
+
   test("should throw exception when parsing map without type key", () {
     expect(() => MotionTagEvent.parseMap({'other': 'OTHER'}),
         throwsA(TypeMatcher<ArgumentError>()));

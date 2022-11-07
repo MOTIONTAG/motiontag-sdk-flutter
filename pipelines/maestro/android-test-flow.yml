@@ -1,0 +1,68 @@
+appId: de.motiontag.motiontag_example
+---
+- launchApp
+
+# Set user JWT
+- tapOn:
+    text: "User token"
+- inputText: "123456789"
+- hideKeyboard
+- tapOn:
+    text: "Save"
+- assertVisible:
+    text: "Updating the user token to 123456789 DONE."
+
+# Grant Activity recognition permission
+- tapOn: "Activity recognition"
+- tapOn:
+    text: "Allow"
+    optional: true
+- assertVisible:
+    text: "Requesting activity recognition permission DONE."
+
+# Grant Location (in use) permission
+- tapOn:
+    text: "Location (in use)"
+- tapOn:
+    text: "While using the app"
+    optional: true
+- assertVisible:
+    text: "Requesting location (in use) permission DONE."
+
+# Grant Location (always) permission
+- tapOn:
+    text: "Location (always)"
+- tapOn:
+    text: "Allow all the time"
+    optional: true
+- runFlow:
+    when:
+      visible: "Allow all the time"
+    file: navigate-back-flow.yml
+- assertVisible:
+    text: "Requesting location (always) permission DONE."
+
+# Start tracking
+- tapOn:
+    text: "Start"
+- assertVisible:
+    text: "Starting the SDK DONE."
+- assertVisible:
+    text: "MotionTagEvent(type: started)"
+- extendedWaitUntil:
+    visible: "MotionTagEvent(type: location)"
+    timeout: 30000
+
+# Stop tracking
+- tapOn:
+      text: "Stop"
+- assertVisible:
+      text: "Stopping the SDK DONE."
+- assertVisible:
+      text: "MotionTagEvent(type: stopped)"
+
+# Clear data
+- tapOn:
+      text: "Clear"
+- assertVisible:
+      text: "Clearing data DONE."
