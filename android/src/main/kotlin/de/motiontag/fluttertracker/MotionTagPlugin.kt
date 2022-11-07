@@ -32,7 +32,7 @@ class MotionTagPlugin : FlutterPlugin, MethodCallHandler {
   private val motionTagCallback = Callback()
 
   override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
-    channel = MethodChannel(flutterPluginBinding.binaryMessenger, "motiontag")
+    channel = MethodChannel(flutterPluginBinding.binaryMessenger, "de.motiontag.tracker")
     channel.setMethodCallHandler(this)
     app = flutterPluginBinding.applicationContext as Application
 

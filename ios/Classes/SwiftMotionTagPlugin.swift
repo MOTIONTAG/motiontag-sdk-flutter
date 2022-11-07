@@ -16,7 +16,7 @@ public class SwiftMotionTagPlugin: NSObject, FlutterPlugin, MotionTagDelegate {
     }
     
     public static func register(with registrar: FlutterPluginRegistrar) {
-        let channel = FlutterMethodChannel(name: "motiontag", binaryMessenger: registrar.messenger())
+        let channel = FlutterMethodChannel(name: "de.motiontag.tracker", binaryMessenger: registrar.messenger())
         let instance = SwiftMotionTagPlugin(channel: channel);
         registrar.addMethodCallDelegate(instance, channel: channel)
     }
