@@ -1,3 +1,5 @@
+# Android integration tests. Must be executed on Android API 31 emulator with Google APIs.
+
 appId: de.motiontag.motiontag_example
 ---
 - launchApp
@@ -13,7 +15,8 @@ appId: de.motiontag.motiontag_example
     text: "Updating the user token to 123456789 DONE."
 
 # Grant Activity recognition permission
-- tapOn: "Activity recognition"
+- tapOn:
+    text: "Activity recognition"
 - tapOn:
     text: "Allow"
     optional: true
@@ -22,7 +25,7 @@ appId: de.motiontag.motiontag_example
 
 # Grant Location (in use) permission
 - tapOn:
-    text: "Location (in use)"
+    text: "TODO Location (in use)"
 - tapOn:
     text: "While using the app"
     optional: true

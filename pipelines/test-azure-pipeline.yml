@@ -24,6 +24,11 @@ stages:
 
           - template: templates/prepare-machine.yml
 
+          # TODO: Remove it
+          - script: |
+              flutter --help
+            displayName: 'flutter Help'
+
           - task: FlutterCommand@0
             displayName: 'Check code format'
             inputs:
@@ -56,19 +61,14 @@ stages:
               targetPath: $(System.DefaultWorkingDirectory)/coverage/html
               artifactName: PluginTestCoverage
 
-          - bash: '$(System.DefaultWorkingDirectory)/pipelines/scripts/init-android-emulator.sh'
-            displayName: 'Init Emulator'
-
-          - script: |
-              brew tap mobile-dev-inc/tap 
-              brew install maestro
-            displayName: 'Install Maestro'
-
           - task: FlutterCommand@0
             displayName: 'Build Android app'
             inputs:
               arguments: 'build apk --debug'
               projectDirectory: 'example'
+
+          - bash: '$(System.DefaultWorkingDirectory)/pipelines/scripts/init-android-emulator.sh'
+            displayName: 'Init Emulator'
 
           - task: FlutterCommand@0
             displayName: 'Install Android app'
@@ -77,5 +77,10 @@ stages:
               projectDirectory: 'example'
 
           - script: |
+              brew tap mobile-dev-inc/tap 
+              brew install maestro
+            displayName: 'Install Maestro'
+
+          - script: |
               maestro test pipelines/maestro/android-test-flow.yml
-            displayName: 'Integration tests on Android'
+            displayName: 'Android integration tests'
