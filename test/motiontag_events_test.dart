@@ -17,11 +17,6 @@ void main() {
         false);
   });
 
-  test('should parse event from map with known type', () {
-    var event = MotionTagEvent.parseMap({'type': 'AUTO_STOP'});
-    expect(event, MotionTagEvent(MotionTagEventType.autoStop));
-  });
-
   test("should throw exception when parsing map without type key", () {
     expect(() => MotionTagEvent.parseMap({'other': 'OTHER'}),
         throwsA(TypeMatcher<ArgumentError>()));
@@ -30,5 +25,40 @@ void main() {
   test("should throw exception when parsing map with unknown type", () {
     expect(() => MotionTagEvent.parseMap({'type': 'UNKNOWN_TYPE'}),
         throwsA(TypeMatcher<ArgumentError>()));
+  });
+
+  test('should parse AUTO_START event from map', () {
+    var event = MotionTagEvent.parseMap({'type': 'AUTO_START'});
+    expect(event, MotionTagEvent(MotionTagEventType.autoStart));
+  });
+
+  test('should parse AUTO_STOP event from map', () {
+    var event = MotionTagEvent.parseMap({'type': 'AUTO_STOP'});
+    expect(event, MotionTagEvent(MotionTagEventType.autoStop));
+  });
+
+  test('should parse STARTED event from map', () {
+    var event = MotionTagEvent.parseMap({'type': 'STARTED'});
+    expect(event, MotionTagEvent(MotionTagEventType.started));
+  });
+
+  test('should parse STOPPED event from map', () {
+    var event = MotionTagEvent.parseMap({'type': 'STOPPED'});
+    expect(event, MotionTagEvent(MotionTagEventType.stopped));
+  });
+
+  test('should parse LOCATION event from map', () {
+    var event = MotionTagEvent.parseMap({'type': 'LOCATION'});
+    expect(event, MotionTagEvent(MotionTagEventType.location));
+  });
+
+  test('should parse TRANSMISSION_SUCCESS event from map', () {
+    var event = MotionTagEvent.parseMap({'type': 'TRANSMISSION_SUCCESS'});
+    expect(event, MotionTagEvent(MotionTagEventType.transmissionSuccess));
+  });
+
+  test('should parse TRANSMISSION_ERROR event from map', () {
+    var event = MotionTagEvent.parseMap({'type': 'TRANSMISSION_ERROR'});
+    expect(event, MotionTagEvent(MotionTagEventType.transmissionError));
   });
 }
