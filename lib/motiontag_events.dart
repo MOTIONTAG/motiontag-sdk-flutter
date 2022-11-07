@@ -76,10 +76,23 @@ class MotionTagEvent {
 
   factory MotionTagEvent.parseMap(dynamic map) {
     final String typeString = map['type'];
-
-    return MotionTagEvent(_motionTagEventTypeFromString[typeString]!);
+    var event = _motionTagEventTypeFromString[typeString];
+    if (event == null) {
+      throw Exception('Could not parse unknown $typeString event');
+    }
+    return MotionTagEvent(event);
   }
 
   @override
   String toString() => 'MotionTagEvent(type: ${type.name})';
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is MotionTagEvent &&
+          runtimeType == other.runtimeType &&
+          type == other.type;
+
+  @override
+  int get hashCode => type.hashCode;
 }

@@ -11,10 +11,6 @@ class ChannelMock {
     _channel = MethodChannel(_channelName);
 
     TestWidgetsFlutterBinding.ensureInitialized();
-
-    TestDefaultBinaryMessengerBinding.instance?.defaultBinaryMessenger
-        .setMockMethodCallHandler(
-            _channel, (MethodCall methodCall) => handler(methodCall));
   }
 
   dynamic handler(MethodCall methodCall) {
@@ -31,8 +27,26 @@ class ChannelMock {
     return Future.value(null);
   }
 
+  void registerCallHandler() {
+    TestDefaultBinaryMessengerBinding.instance?.defaultBinaryMessenger
+        .setMockMethodCallHandler(
+            _channel, (MethodCall methodCall) => handler(methodCall));
+  }
+
+  void unregisterCallHandler() {
+    TestDefaultBinaryMessengerBinding.instance?.defaultBinaryMessenger
+        .setMockMethodCallHandler(_channel, null);
+  }
+
   void mockMethod(String methodName, {List<dynamic>? returnValues}) {
     mockedMethods[methodName] = returnValues ?? [];
+  }
+
+  void invokeMethod(String methodName, {dynamic arguments}) {
+    var codec = StandardMethodCodec();
+    var call = codec.encodeMethodCall(MethodCall(methodName, arguments));
+    ServicesBinding.instance.defaultBinaryMessenger
+        .handlePlatformMessage(_channelName, call, null);
   }
 
   void reset() {

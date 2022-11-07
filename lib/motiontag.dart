@@ -10,28 +10,10 @@ class MotionTag {
 
   final MethodChannel _channel = const MethodChannel('de.motiontag.tracker');
   void Function(MotionTagEvent event)? _observer;
-
   bool get _isAndroid => defaultTargetPlatform == TargetPlatform.android;
 
   MotionTag._() {
     _channel.setMethodCallHandler(_methodCallHandler);
-  }
-
-  Future<dynamic> _methodCallHandler(MethodCall call) async {
-    switch (call.method) {
-      case "onEvent":
-        final event = MotionTagEvent.parseMap(call.arguments);
-        _observer?.call(event);
-
-        // Simulate a MotionTagEventType.started event on Android to match the iOS behavior
-        if (_isAndroid && event.type == MotionTagEventType.autoStart) {
-          _observer?.call(MotionTagEvent(MotionTagEventType.started));
-        }
-        // Simulate a MotionTagEventType.stopped event on Android to match the iOS behavior
-        else if (_isAndroid && event.type == MotionTagEventType.autoStop) {
-          _observer?.call(MotionTagEvent(MotionTagEventType.stopped));
-        }
-    }
   }
 
   /// Registers observer to receive [MotionTagEvent]
@@ -87,5 +69,22 @@ class MotionTag {
   /// Returns `true` if the tracking is active and collecting data, `false` otherwise.
   Future<bool> isTrackingActive() async {
     return await _channel.invokeMethod('isTrackingActive');
+  }
+
+  Future<dynamic> _methodCallHandler(MethodCall call) async {
+    switch (call.method) {
+      case "onEvent":
+        final event = MotionTagEvent.parseMap(call.arguments);
+        _observer?.call(event);
+
+        // Simulate a MotionTagEventType.started event on Android to match the iOS behavior
+        if (_isAndroid && event.type == MotionTagEventType.autoStart) {
+          _observer?.call(MotionTagEvent(MotionTagEventType.started));
+        }
+        // Simulate a MotionTagEventType.stopped event on Android to match the iOS behavior
+        else if (_isAndroid && event.type == MotionTagEventType.autoStop) {
+          _observer?.call(MotionTagEvent(MotionTagEventType.stopped));
+        }
+    }
   }
 }
