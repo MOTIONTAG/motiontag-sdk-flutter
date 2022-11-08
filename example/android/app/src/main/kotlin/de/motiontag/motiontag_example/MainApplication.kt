@@ -19,6 +19,7 @@ class MainApplication : Application() {
   override fun onCreate() {
     super.onCreate()
 
+    // The MotionTag Android SDK must be initialized here.
     MotionTagWrapper.initialize(
       this,
       isWifiOnlyDataTransfer = false,

@@ -4,7 +4,7 @@ import de.motiontag.tracker.Event
 import de.motiontag.tracker.MotionTag
 
 object MotionTagCallbackDelegate : MotionTag.Callback {
-  private val delegates = mutableListOf<MotionTag.Callback>()
+  private val delegates = mutableSetOf<MotionTag.Callback>()
 
   fun register(delegate: MotionTag.Callback) {
     delegates.add(delegate)
