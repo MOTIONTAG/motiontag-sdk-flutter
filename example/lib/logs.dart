@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 
 class Logs extends StatefulWidget {
   static const logName = 'Example App';
@@ -14,7 +14,7 @@ class Logs extends StatefulWidget {
     StackTrace? stackTrace,
   }) {
     _globalKey.currentState!.print(
-      '$text\n',
+      text,
       error: error,
       stackTrace: stackTrace,
     );
@@ -26,7 +26,7 @@ class Logs extends StatefulWidget {
 
 class LogsState extends State<Logs> {
   final ScrollController _scrollController = ScrollController();
-  String _logs = "";
+  final List<String> _logs = [];
 
   void print(
     String text, {
@@ -40,7 +40,7 @@ class LogsState extends State<Logs> {
       stackTrace: stackTrace,
     );
     setState(() {
-      _logs += text;
+      _logs.add(text);
     });
     _scrollToEnd();
   }
@@ -55,9 +55,15 @@ class LogsState extends State<Logs> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
+    return Scrollbar(
       controller: _scrollController,
-      child: Text(_logs),
+      child: ListView.builder(
+        controller: _scrollController,
+        itemCount: _logs.length,
+        itemBuilder: (context, index) {
+          return Text(_logs[index]);
+        },
+      ),
     );
   }
 }

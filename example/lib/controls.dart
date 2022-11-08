@@ -20,7 +20,7 @@ class ControlsState extends State<Controls> {
     Logs.print('$logMessage...');
     try {
       await function();
-      Logs.print('$logMessage DONE');
+      Logs.print('$logMessage DONE.');
     } catch (error, stackTrace) {
       Logs.print('$logMessage ERROR. See the console logs for details',
           error: error, stackTrace: stackTrace);
@@ -143,12 +143,12 @@ class ControlsLayout extends StatelessWidget {
               ),
             ActionButton(
               enabled: interactionEnabled,
-              text: 'Permission (in use)',
+              text: 'Location (in use)',
               onPressed: onRequestLocationInUsePermission,
             ),
             ActionButton(
               enabled: interactionEnabled,
-              text: 'Permission (always)',
+              text: 'Location (always)',
               onPressed: onRequestLocationAlwasPermission,
             ),
             ActionButton(

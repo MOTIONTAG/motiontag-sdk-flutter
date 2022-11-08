@@ -19,7 +19,7 @@ stages:
       vmImage: ${{variables.vmImage}}
     jobs:
       - job: Lint_And_Test
-        timeoutInMinutes: 30
+        timeoutInMinutes: 45
         steps:
 
           - template: templates/prepare-machine.yml
@@ -42,18 +42,22 @@ stages:
               arguments: 'test --coverage'
               projectDirectory: '.'
 
-          - task: FlutterCommand@0
-            displayName: 'Build example app'
-            inputs:
-              arguments: 'build appbundle'
-              projectDirectory: 'example'
+          - script: |
+              brew install lcov
+            displayName: 'Install lcov'
 
           - script: |
               genhtml coverage/lcov.info -o coverage/html
-            displayName: 'Prepare plugin coverage'
+            displayName: 'Parse test coverage'
 
           - task: PublishPipelineArtifact@1
-            displayName: 'Publish plugin coverage'
+            displayName: 'Publish test coverage'
             inputs:
               targetPath: $(System.DefaultWorkingDirectory)/coverage/html
               artifactName: PluginTestCoverage
+
+          - task: FlutterCommand@0
+            displayName: 'Build app'
+            inputs:
+              arguments: 'build apk --debug'
+              projectDirectory: 'example'
