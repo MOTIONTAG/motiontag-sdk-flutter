@@ -28,14 +28,12 @@ class MotionTagPlugin : FlutterPlugin, MethodCallHandler {
   private lateinit var app: Application
 
   private val motionTag = MotionTag.getInstance()
-
   private val motionTagCallback = Callback()
 
   override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
     channel = MethodChannel(flutterPluginBinding.binaryMessenger, "de.motiontag.tracker")
     channel.setMethodCallHandler(this)
     app = flutterPluginBinding.applicationContext as Application
-
     MotionTagCallbackDelegate.register(motionTagCallback)
   }
 
@@ -48,26 +46,29 @@ class MotionTagPlugin : FlutterPlugin, MethodCallHandler {
     try {
       when (call.method) {
         "getUserToken" -> {
-          result.success(getUserToken())
+          val userToken = motionTag.userToken
+          result.success(userToken)
         }
         "setUserToken" -> {
-          setUserToken(call.argument<String>("userToken")!!);
+          motionTag.userToken = call.argument<String?>("userToken")
           result.success(null)
         }
         "start" -> {
-          start();
+          motionTag.start()
           result.success(null)
         }
         "stop" -> {
-          stop();
+          motionTag.stop()
           result.success(null)
         }
         "clearData" -> {
-          clearData();
-          result.success(null)
+          motionTag.clearData {
+            result.success(null)
+          }
         }
         "isTrackingActive" -> {
-          result.success(isTrackingActive())
+          val isTrackingActive = motionTag.isTrackingActive
+          result.success(isTrackingActive)
         }
         else -> result.notImplemented()
       }
@@ -75,47 +76,4 @@ class MotionTagPlugin : FlutterPlugin, MethodCallHandler {
       result.error("UNKNOWN", error.message, error)
     }
   }
-
-  /**
-   * Wraps [MotionTag.getUserToken]
-   */
-  private fun getUserToken(): String? {
-    return motionTag.getUserToken()
-  }
-
-  /**
-   * Wraps [MotionTag.userToken]
-   */
-  private fun setUserToken(userToken: String) {
-    motionTag.userToken(userToken)
-  }
-
-  /**
-   * Wraps [MotionTag.start]
-   */
-  private fun start() {
-    motionTag.start()
-  }
-
-  /**
-   * Wraps [MotionTag.stop]
-   */
-  private fun stop() {
-    motionTag.stop()
-  }
-
-  /**
-   * Wraps [MotionTag.clearData]
-   */
-  private fun clearData() {
-    motionTag.clearData()
-  }
-
-  /**
-   * Wraps [MotionTag.isTrackingActive]
-   */
-  private fun isTrackingActive(): Boolean {
-    return motionTag.isTrackingActive()
-  }
-
 }

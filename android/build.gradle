@@ -3,7 +3,7 @@ version '1.0.0'
 
 buildscript {
     ext.kotlin_version = '1.5.20'
-    ext.motiontag_version = '6.1.1'
+    ext.motiontag_version = '7.0.0'
     repositories {
         google()
         mavenCentral()
@@ -27,13 +27,14 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 33
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
     defaultConfig {
-        minSdkVersion 21
+        minSdkVersion 23
+        targetSdkVersion 33
     }
 
     compileOptions {

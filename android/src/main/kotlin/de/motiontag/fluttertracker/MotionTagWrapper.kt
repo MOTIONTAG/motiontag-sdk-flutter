@@ -2,7 +2,6 @@ package de.motiontag.fluttertracker
 
 import android.app.Application
 import de.motiontag.tracker.MotionTag
-import de.motiontag.tracker.Settings
 
 object MotionTagWrapper {
   private val motionTag = MotionTag.getInstance()
@@ -12,7 +11,7 @@ object MotionTagWrapper {
     notification: android.app.Notification,
     isWifiOnlyDataTransfer: Boolean
   ) {
-    val settings = Settings(notification, isWifiOnlyDataTransfer)
-    motionTag.initialize(application, settings, MotionTagCallbackDelegate)
+    motionTag.initialize(application, notification, MotionTagCallbackDelegate)
+    motionTag.wifiOnlyDataTransfer = isWifiOnlyDataTransfer
   }
 }
