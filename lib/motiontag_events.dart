@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// TODO: Update comments
 enum MotionTagEventType {
   /// Informs the application that tracking has been **automatically** started.
   ///
@@ -74,14 +75,14 @@ class MotionTagEvent {
 
   MotionTagEvent(this.type);
 
-  factory MotionTagEvent.parseMap(dynamic map) {
+  static MotionTagEvent? parseMap(dynamic map) {
     final String? typeString = map['type'];
     if (typeString == null) {
-      throw ArgumentError('Could not find type key when parsing event');
+      return null;
     }
     var event = _motionTagEventTypeFromString[typeString];
     if (event == null) {
-      throw ArgumentError('Could not parse unknown $typeString event type');
+      return null;
     }
     return MotionTagEvent(event);
   }

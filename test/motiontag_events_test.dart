@@ -22,14 +22,12 @@ void main() {
         "MotionTagEvent(type: started)");
   });
 
-  test("should throw exception when parsing map without type key", () {
-    expect(() => MotionTagEvent.parseMap({'other': 'OTHER'}),
-        throwsA(TypeMatcher<ArgumentError>()));
+  test("should return null when parsing map without type key", () {
+    expect(MotionTagEvent.parseMap({'other': 'OTHER'}), null);
   });
 
-  test("should throw exception when parsing map with unknown type", () {
-    expect(() => MotionTagEvent.parseMap({'type': 'UNKNOWN_TYPE'}),
-        throwsA(TypeMatcher<ArgumentError>()));
+  test("should return null when parsing map with unknown type", () {
+    expect(MotionTagEvent.parseMap({'type': 'UNKNOWN_TYPE'}), null);
   });
 
   test('should parse AUTO_START event from map', () {

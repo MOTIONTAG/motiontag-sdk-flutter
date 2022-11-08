@@ -75,6 +75,7 @@ class MotionTag {
     switch (call.method) {
       case "onEvent":
         final event = MotionTagEvent.parseMap(call.arguments);
+        if (event == null) return;
         _observer?.call(event);
 
         // Simulate a MotionTagEventType.started event on Android to match the iOS behavior

@@ -175,7 +175,8 @@ void main() {
   });
 
   group('onEvent invocation', () {
-    testWidgets('should call registered observer', (tester) async {
+    testWidgets('with correct event should call registered observer',
+        (tester) async {
       channelMock.unregisterCallHandler();
 
       List<MotionTagEvent> events = [];
@@ -184,6 +185,17 @@ void main() {
 
       expect(events.length, 1);
       expect(events.first, MotionTagEvent(MotionTagEventType.location));
+    }, timeout: defaultTimeout);
+
+    testWidgets('with unknown event should call registered observer',
+        (tester) async {
+      channelMock.unregisterCallHandler();
+
+      List<MotionTagEvent> events = [];
+      motionTag.setObserver((event) => events.add(event));
+      channelMock.invokeMethod("onEvent", arguments: {'type': 'UNKNOWN'});
+
+      expect(events.length, 0);
     }, timeout: defaultTimeout);
 
     testWidgets('with AUTO_START should send started event on Android',
