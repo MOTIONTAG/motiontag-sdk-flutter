@@ -1,7 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:motiontag_sdk/events/event_types.dart';
+import 'package:motiontag_sdk/events/started_event.dart';
+import 'package:motiontag_sdk/events/stopped_event.dart';
+import 'package:motiontag_sdk/events/transmission_error_event.dart';
 import 'package:motiontag_sdk/motiontag.dart';
-import 'package:motiontag_sdk/events/motiontag_events.dart';
 
 import 'channel_mock.dart';
 
@@ -160,8 +163,8 @@ void main() {
     }, timeout: defaultTimeout);
   });
 
-  group('calling clearData method', () {
-    testWidgets('isTrackingActive should return value using channel',
+  group('calling isTrackingActive method', () {
+    testWidgets('should return value using channel',
         (tester) async {
       channelMock.mockMethod('isTrackingActive', returnValues: [true]);
 
@@ -181,10 +184,11 @@ void main() {
 
       List<MotionTagEvent> events = [];
       motionTag.setObserver((event) => events.add(event));
-      channelMock.invokeMethod("onEvent", arguments: {'type': 'LOCATION'});
+      channelMock.invokeMethod("onEvent",
+          arguments: {'type': 'TRANSMISSION_ERROR', 'error': 'some_error'});
 
       expect(events.length, 1);
-      expect(events.first, MotionTagEvent(MotionTagEventType.location));
+      expect(events.first, TransmissionErrorEvent("some_error"));
     }, timeout: defaultTimeout);
 
     testWidgets('with unknown event should call registered observer',
@@ -198,60 +202,28 @@ void main() {
       expect(events.length, 0);
     }, timeout: defaultTimeout);
 
-    testWidgets('with AUTO_START should send started event on Android',
-        (tester) async {
-      debugDefaultTargetPlatformOverride = TargetPlatform.android;
+    testWidgets('with STARTED should send started event ', (tester) async {
       channelMock.unregisterCallHandler();
 
       List<MotionTagEvent> events = [];
       motionTag.setObserver((event) => events.add(event));
-      channelMock.invokeMethod("onEvent", arguments: {'type': 'AUTO_START'});
-
-      expect(events.length, 2);
-      expect(events.last, MotionTagEvent(MotionTagEventType.started));
-      debugDefaultTargetPlatformOverride = null;
-    }, timeout: defaultTimeout);
-
-    testWidgets('with AUTO_START should not send started event on iOS',
-        (tester) async {
-      debugDefaultTargetPlatformOverride = TargetPlatform.iOS;
-      channelMock.unregisterCallHandler();
-
-      List<MotionTagEvent> events = [];
-      motionTag.setObserver((event) => events.add(event));
-      channelMock.invokeMethod("onEvent", arguments: {'type': 'AUTO_START'});
+      channelMock.invokeMethod("onEvent", arguments: {'type': 'STARTED'});
 
       expect(events.length, 1);
-      expect(events.first, MotionTagEvent(MotionTagEventType.autoStart));
-      debugDefaultTargetPlatformOverride = null;
+      expect(events.first, StartedEvent());
     }, timeout: defaultTimeout);
 
-    testWidgets('with AUTO_STOP should send started event on Android',
-        (tester) async {
-      debugDefaultTargetPlatformOverride = TargetPlatform.android;
+    testWidgets('with STOPPED should send stopped event ', (tester) async {
       channelMock.unregisterCallHandler();
 
       List<MotionTagEvent> events = [];
       motionTag.setObserver((event) => events.add(event));
-      channelMock.invokeMethod("onEvent", arguments: {'type': 'AUTO_STOP'});
-
-      expect(events.length, 2);
-      expect(events.last, MotionTagEvent(MotionTagEventType.stopped));
-      debugDefaultTargetPlatformOverride = null;
-    }, timeout: defaultTimeout);
-
-    testWidgets('with AUTO_STOP should not send started event on iOS',
-        (tester) async {
-      debugDefaultTargetPlatformOverride = TargetPlatform.iOS;
-      channelMock.unregisterCallHandler();
-
-      List<MotionTagEvent> events = [];
-      motionTag.setObserver((event) => events.add(event));
-      channelMock.invokeMethod("onEvent", arguments: {'type': 'AUTO_STOP'});
+      channelMock.invokeMethod("onEvent", arguments: {'type': 'STOPPED'});
 
       expect(events.length, 1);
-      expect(events.first, MotionTagEvent(MotionTagEventType.autoStop));
-      debugDefaultTargetPlatformOverride = null;
+      expect(events.last, StoppedEvent());
     }, timeout: defaultTimeout);
+
+    // TODO: Test transmission success, transmission error, location
   });
 }
