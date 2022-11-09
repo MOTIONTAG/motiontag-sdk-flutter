@@ -1,6 +1,6 @@
 import 'package:test/test.dart';
 
-import 'package:motiontag_sdk/motiontag_events.dart';
+import 'package:motiontag_sdk/events/motiontag_events.dart';
 
 void main() {
   test('events with same types should be equal', () {

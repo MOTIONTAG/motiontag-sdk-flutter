@@ -2,7 +2,7 @@ group 'de.motiontag.fluttertracker'
 version '1.0-SNAPHOT'
 
 buildscript {
-    ext.kotlin_version = '1.5.20'
+    ext.kotlin_version = '1.6.21'
     ext.motiontag_version = '7.0.0'
     repositories {
         google()

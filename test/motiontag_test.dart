@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:motiontag_sdk/motiontag.dart';
-import 'package:motiontag_sdk/motiontag_events.dart';
+import 'package:motiontag_sdk/events/motiontag_events.dart';
 
 import 'channel_mock.dart';
 

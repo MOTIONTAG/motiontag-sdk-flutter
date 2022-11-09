@@ -46,20 +46,22 @@ class LogsState extends State<Logs> {
   }
 
   void _scrollToEnd() {
-    _scrollController.animateTo(
-      _scrollController.position.maxScrollExtent,
-      duration: Duration(milliseconds: 500),
-      curve: Curves.ease,
-    );
+    WidgetsBinding.instance.addPostFrameCallback((_) => {
+      _scrollController
+          .jumpTo(_scrollController.position.maxScrollExtent)
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scrollbar(
       controller: _scrollController,
-      child: ListView.builder(
+      child: ListView.separated(
         controller: _scrollController,
         itemCount: _logs.length,
+        separatorBuilder: (BuildContext context, int index) {
+          return Divider(color: Colors.black);
+        },
         itemBuilder: (context, index) {
           return Text(_logs[index]);
         },
