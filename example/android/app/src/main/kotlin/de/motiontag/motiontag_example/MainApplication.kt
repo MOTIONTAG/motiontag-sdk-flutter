@@ -1,4 +1,4 @@
-package de.motiontag.motiontag_example
+package de.motiontag.motiontag_sdk_example
 
 import android.app.Application
 import android.app.Notification

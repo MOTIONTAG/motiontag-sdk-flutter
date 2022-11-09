@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:motiontag_example/controls.dart';
-import 'package:motiontag_example/logs.dart';
-import 'package:motiontag_example/status.dart';
+import 'package:motiontag_sdk_example/controls.dart';
+import 'package:motiontag_sdk_example/logs.dart';
+import 'package:motiontag_sdk_example/status.dart';
 
 void main() {
   runApp(App());

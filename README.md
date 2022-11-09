@@ -50,7 +50,7 @@ which you register in the `AndroidManifest.xml`.
 
 You have to call `MotionTagWrapper.initialize()` from the `Application`'s
 `onCreate` callback, check out
-[`MainApplication.kt`](example/android/app/src/main/kotlin/de/motiontag/motiontag_example/MainApplication.kt)
+[`MainApplication.kt`](example/android/app/src/main/kotlin/de/motiontag/motiontag_sdk_example/MainApplication.kt)
 as an example.
 
 ## Permission management
