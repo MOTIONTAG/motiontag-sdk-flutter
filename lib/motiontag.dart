@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import 'package:motiontag/motiontag_events.dart';
+import 'package:motiontag_sdk/motiontag_events.dart';
 
 // TODO: Update method description comments
 class MotionTag {

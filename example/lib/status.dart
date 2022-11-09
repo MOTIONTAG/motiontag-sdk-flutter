@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:motiontag/motiontag.dart';
+import 'package:motiontag_sdk/motiontag.dart';
 import 'package:motiontag_example/logs.dart';
 
 class Status extends StatefulWidget {

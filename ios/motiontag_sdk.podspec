@@ -3,7 +3,7 @@
 # Run `pod lib lint motiontag.podspec` to validate before publishing.
 #
 Pod::Spec.new do |s|
-  s.name             = 'motiontag'
+  s.name             = 'motiontag_sdk'
   s.version          = '1.0.0'
   s.summary          = 'Flutter wrapper for the MOTIONTAG SDK'
   s.description      = 'Flutter wrapper for the MOTIONTAG SDK'

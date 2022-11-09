@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:motiontag/motiontag.dart';
+import 'package:motiontag_sdk/motiontag.dart';
 import 'package:motiontag_example/logs.dart';
 import 'package:motiontag_example/status.dart';
 import 'package:permission_handler/permission_handler.dart';

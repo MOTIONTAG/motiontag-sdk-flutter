@@ -1,7 +1,7 @@
 import UIKit
 import Flutter
 import MotionTagSDK
-import motiontag
+import motiontag_sdk
 
 @UIApplicationMain
 @objc class AppDelegate: FlutterAppDelegate {
