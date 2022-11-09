@@ -1,6 +1,6 @@
 name: motiontag # TODO: Rename it
 description: Flutter wrapper for the MOTIONTAG SDK
-version: 1.0.0+1
+version: 0.1.0
 homepage: https://github.com/MOTIONTAG/motiontag-sdk-flutter#readme
 repository: https://github.com/MOTIONTAG/motiontag-sdk-flutter
 

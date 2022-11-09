@@ -1,5 +1,5 @@
 group 'de.motiontag.fluttertracker'
-version '1.0.0'
+version '1.0.0-SNAPHOT'
 
 buildscript {
     ext.kotlin_version = '1.5.20'
