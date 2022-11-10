@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
-import 'events/event_types.dart';
+import 'events/motiontag_event.dart';
 import 'events/location_event.dart';
 import 'events/started_event.dart';
 import 'events/stopped_event.dart';
@@ -83,7 +83,7 @@ class MotionTag {
   }
 
   void _processOnEvent(dynamic arguments) {
-    var eventType = getMotionTagEventType(arguments['type']);
+    var eventType = MotionTagEventType.getById(arguments['type']);
     if (eventType == null) return;
     switch (eventType) {
       case MotionTagEventType.started:

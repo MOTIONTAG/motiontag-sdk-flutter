@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
 
-import 'event_types.dart';
+import 'motiontag_event.dart';
 
 @immutable
-class TransmissionSuccessEvent implements MotionTagEvent {
+class TransmissionSuccessEvent extends MotionTagEvent {
   @override
   final MotionTagEventType type = MotionTagEventType.transmissionSuccess;
   final DateTime trackedFrom;
@@ -26,6 +26,8 @@ class TransmissionSuccessEvent implements MotionTagEvent {
 
   @override
   String toString() {
-    return 'TransmissionSuccessEvent{type: $type, trackedFrom: $trackedFrom, trackedTo: $trackedTo}';
+    return 'TransmissionSuccessEvent{type: $type, '
+        'trackedFrom: $trackedFrom, '
+        'trackedTo: $trackedTo}';
   }
 }

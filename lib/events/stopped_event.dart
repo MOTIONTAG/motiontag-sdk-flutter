@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 
-import 'event_types.dart';
+import 'motiontag_event.dart';
 
 @immutable
 class StoppedEvent implements MotionTagEvent {
