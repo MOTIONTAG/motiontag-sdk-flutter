@@ -21,10 +21,7 @@ public class SwiftMotionTagPlugin: NSObject, FlutterPlugin {
     
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
         switch(call.method) {
-        case "initialize":
-            // initialize is a no-op on iOS
-            result(nil)
-        case "getUserToken":
+          case "getUserToken":
             let userToken = motionTag.userToken
             result(userToken)
         case "setUserToken":
@@ -58,31 +55,46 @@ public class MotionTagDelegateWrapper: NSObject, MotionTagDelegate {
 
     public static let sharedInstance = MotionTagDelegateWrapper()
     public var channel: FlutterMethodChannel? = nil
-
     private override init() {
     }
 
     public func trackingStatusChanged(_ isTracking: Bool) {
-        didEventOccur(isTracking ? "STARTED" : "STOPPED")
+        didEventOccur(isTracking ? ["type": "STARTED"] : ["type": "STOPPED"])
     }
 
     public func locationAuthorizationStatusDidChange(_ status: CLAuthorizationStatus, precise: Bool) {
-        // TODO: Ignoring it for now
+        // Ignore
     }
 
     public func motionActivityAuthorized(_ authorized: Bool) {
-        // TODO: Ignoring it for now
+        // Ignore
     }
 
     public func didTrackLocation(_ location: CLLocation) {
-        didEventOccur("LOCATION")
+        // TODO: Implement it
     }
 
     public func dataUploadWithTracked(from startDate: Date, to endDate: Date, didCompleteWithError error: Error?) {
-        didEventOccur(error == nil ? "TRANSMISSION_SUCCESS" : "TRANSMISSION_ERROR")
+        var arguments: [String: Any]
+        if let error = error {
+            arguments = ["type": "TRANSMISSION_ERROR",
+                         "error": error.localizedDescription]
+        } else {
+            arguments = ["type": "TRANSMISSION_SUCCESS",
+                         "trackedFrom": startDate.timestamp,
+                         "trackedTo": endDate.timestamp]
+        }
+        didEventOccur(arguments)
     }
 
-    private func didEventOccur(_ type: String) {
-        channel?.invokeMethod("onEvent", arguments: ["type": type])
+    private func didEventOccur(_ arguments: [String: Any]) {
+        channel?.invokeMethod("onEvent", arguments: arguments)
+    }
+}
+
+private extension Date {
+
+    var timestamp: Int {
+        Int(self.timeIntervalSince1970 * 1_000)
     }
 }
