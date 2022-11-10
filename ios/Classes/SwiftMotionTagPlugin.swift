@@ -2,6 +2,7 @@ import Flutter
 import UIKit
 import MotionTagSDK
 
+// TODO: Add unit tests
 public class SwiftMotionTagPlugin: NSObject, FlutterPlugin {
 
     private lazy var motionTag = MotionTagCore.sharedInstance
