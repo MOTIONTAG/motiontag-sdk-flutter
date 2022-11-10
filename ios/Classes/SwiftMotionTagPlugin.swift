@@ -6,22 +6,22 @@ public class SwiftMotionTagPlugin: NSObject, FlutterPlugin {
 
     private lazy var motionTag = MotionTagCore.sharedInstance
     private var channel: FlutterMethodChannel
-    
+
     init(channel: FlutterMethodChannel) {
         self.channel = channel
         super.init()
     }
-    
+
     public static func register(with registrar: FlutterPluginRegistrar) {
         let channel = FlutterMethodChannel(name: "de.motiontag.tracker", binaryMessenger: registrar.messenger())
         let instance = SwiftMotionTagPlugin(channel: channel);
         MotionTagDelegateWrapper.sharedInstance.channel = channel
         registrar.addMethodCallDelegate(instance, channel: channel)
     }
-    
+
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
-        switch(call.method) {
-          case "getUserToken":
+        switch (call.method) {
+        case "getUserToken":
             let userToken = motionTag.userToken
             result(userToken)
         case "setUserToken":
@@ -54,24 +54,34 @@ public class SwiftMotionTagPlugin: NSObject, FlutterPlugin {
 public class MotionTagDelegateWrapper: NSObject, MotionTagDelegate {
 
     public static let sharedInstance = MotionTagDelegateWrapper()
-    public var channel: FlutterMethodChannel? = nil
+    public weak var channel: FlutterMethodChannel? = nil
+
     private override init() {
     }
 
     public func trackingStatusChanged(_ isTracking: Bool) {
-        didEventOccur(isTracking ? ["type": "STARTED"] : ["type": "STOPPED"])
+        let arguments = isTracking ? ["type": "STARTED"] : ["type": "STOPPED"]
+        didEventOccur(arguments)
     }
 
     public func locationAuthorizationStatusDidChange(_ status: CLAuthorizationStatus, precise: Bool) {
-        // Ignore
+        // Ignored
     }
 
     public func motionActivityAuthorized(_ authorized: Bool) {
-        // Ignore
+        // Ignored
     }
 
     public func didTrackLocation(_ location: CLLocation) {
-        // TODO: Implement it
+        let arguments: [String: Any] = ["type": "LOCATION",
+                                        "timestamp": location.timestamp.timestampMs,
+                                        "latitude": location.coordinate.latitude,
+                                        "longitude": location.coordinate.longitude,
+                                        "horizontalAccuracy": location.horizontalAccuracy,
+                                        "speed": location.speed < 0 ? nil : location.speed,
+                                        "altitude": location.verticalAccuracy <= 0 ? nil : location.altitude,
+                                        "bearing": location.course < 0 ? nil : location.course]
+        didEventOccur(arguments)
     }
 
     public func dataUploadWithTracked(from startDate: Date, to endDate: Date, didCompleteWithError error: Error?) {
@@ -81,8 +91,8 @@ public class MotionTagDelegateWrapper: NSObject, MotionTagDelegate {
                          "error": error.localizedDescription]
         } else {
             arguments = ["type": "TRANSMISSION_SUCCESS",
-                         "trackedFrom": startDate.timestamp,
-                         "trackedTo": endDate.timestamp]
+                         "trackedFrom": startDate.timestampMs,
+                         "trackedTo": endDate.timestampMs]
         }
         didEventOccur(arguments)
     }
@@ -94,7 +104,7 @@ public class MotionTagDelegateWrapper: NSObject, MotionTagDelegate {
 
 private extension Date {
 
-    var timestamp: Int {
+    var timestampMs: Int {
         Int(self.timeIntervalSince1970 * 1_000)
     }
 }
