@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'motiontag_event.dart';
 
 @immutable
-class TransmissionSuccessEvent extends MotionTagEvent {
+class TransmissionSuccessEvent implements MotionTagEvent {
   @override
   final MotionTagEventType type = MotionTagEventType.transmissionSuccess;
   final DateTime trackedFrom;
