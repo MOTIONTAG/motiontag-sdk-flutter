@@ -16,7 +16,7 @@ iOS: `v4.2.1`
 ## Installation
 ### iOS
 Make sure your Podfile has every line from the relevant section of the [example
-Podfile](example/ios/Podfile#L37-L62).
+Podfile](example/ios/Podfile).
 
 Add the following lines to the `AppDelegate.swift`
 ([docs](https://api.motion-tag.de/developer/ios#6-setup)):
@@ -42,7 +42,7 @@ docs](https://api.motion-tag.de/developer/ios#6-setup).
 
 ### Android
 Add the requested permissions to the manifest
-([example](example/android/app/src/main/AndroidManifest.xml#L4-L7)).
+([example](example/android/app/src/main/AndroidManifest.xml)).
 
 Then create an
 [`Application`](https://developer.android.com/reference/android/app/Application),

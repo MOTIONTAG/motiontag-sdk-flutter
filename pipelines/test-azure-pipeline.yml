@@ -19,7 +19,7 @@ stages:
       vmImage: ${{variables.vmImage}}
     jobs:
       - job: Lint_And_Test
-        timeoutInMinutes: 45
+        timeoutInMinutes: 90
         steps:
 
           - template: templates/prepare-machine.yml
