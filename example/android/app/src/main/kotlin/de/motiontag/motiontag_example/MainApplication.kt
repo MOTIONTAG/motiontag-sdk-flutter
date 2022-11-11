@@ -1,4 +1,4 @@
-package de.motiontag.motiontag_example
+package de.motiontag.motiontag_sdk_example
 
 import android.app.Application
 import android.app.Notification
@@ -8,7 +8,6 @@ import android.os.Build
 import androidx.core.app.NotificationCompat
 import de.motiontag.fluttertracker.MotionTagWrapper
 
-private const val MOTIONTAG_IS_WIFI_ONLY_DATA_TRANSFER = true
 private const val NOTIFICATION_CHANNEL_ID = "motiontag"
 private const val NOTIFICATION_CHANNEL_NAME = "MotionTag"
 private const val NOTIFICATION_CHANNEL_DESCRIPTION = "Test MotionTag notification channel"
@@ -20,9 +19,10 @@ class MainApplication : Application() {
   override fun onCreate() {
     super.onCreate()
 
+    // The MotionTag Android SDK must be initialized here.
     MotionTagWrapper.initialize(
       this,
-      isWifiOnlyDataTransfer = MOTIONTAG_IS_WIFI_ONLY_DATA_TRANSFER,
+      isWifiOnlyDataTransfer = false,
       notification = createNotificationAndNotificationChannel()
     )
   }

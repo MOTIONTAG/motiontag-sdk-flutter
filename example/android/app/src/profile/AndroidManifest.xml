@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="de.motiontag.motiontag_example">
+    package="de.motiontag.motiontag_sdk_example">
     <!-- Flutter needs it to communicate with the running application
          to allow setting
          breakpoints, to provide hot reload, etc.

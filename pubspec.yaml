@@ -1,6 +1,6 @@
-name: motiontag # TODO: Rename it
+name: motiontag_sdk
 description: Flutter wrapper for the MOTIONTAG SDK
-version: 1.0.0+1
+version: 0.1.0
 homepage: https://github.com/MOTIONTAG/motiontag-sdk-flutter#readme
 repository: https://github.com/MOTIONTAG/motiontag-sdk-flutter
 
@@ -10,8 +10,8 @@ repository: https://github.com/MOTIONTAG/motiontag-sdk-flutter
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 environment:
-  sdk: '>=2.18.2 <3.0.0'
-  flutter: ">=2.5.0"
+  sdk: '>=2.17.0 <3.0.0'
+  flutter: '>=3.0.0'
 
 dependencies:
   flutter:

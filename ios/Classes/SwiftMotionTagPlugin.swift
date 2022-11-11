@@ -2,93 +2,110 @@ import Flutter
 import UIKit
 import MotionTagSDK
 
-public class SwiftMotionTagPlugin: NSObject, FlutterPlugin, MotionTagDelegate {
-    private var motionTag: MotionTag!
-    private var channel: FlutterMethodChannel;
-    
+// TODO: Add unit tests
+public class SwiftMotionTagPlugin: NSObject, FlutterPlugin {
+
+    private lazy var motionTag = MotionTagCore.sharedInstance
+    private var channel: FlutterMethodChannel
+
     init(channel: FlutterMethodChannel) {
-        motionTag = MotionTagCore.sharedInstance
         self.channel = channel
-        
         super.init()
-        
-        motionTag.delegate = self
     }
-    
+
     public static func register(with registrar: FlutterPluginRegistrar) {
         let channel = FlutterMethodChannel(name: "de.motiontag.tracker", binaryMessenger: registrar.messenger())
         let instance = SwiftMotionTagPlugin(channel: channel);
+        MotionTagDelegateWrapper.sharedInstance.channel = channel
         registrar.addMethodCallDelegate(instance, channel: channel)
     }
-    
+
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
-        switch(call.method) {
-        case "initialize":
-            // initialize is a no-op on iOS
-            result(nil)
+        switch (call.method) {
         case "getUserToken":
-            result(getUserToken())
+            let userToken = motionTag.userToken
+            result(userToken)
         case "setUserToken":
             let args = call.arguments as! Dictionary<String, Any>
-            setUserToken(userToken: args["userToken"] as! String)
+            motionTag.userToken = args["userToken"] as! String
             result(nil)
         case "start":
-            start()
+            motionTag.start()
             result(nil)
         case "stop":
-            stop()
+            motionTag.stop()
             result(nil)
         case "clearData":
-            clearData()
+            let semaphore = DispatchSemaphore(value: 0)
+            motionTag.clearData(completionHandler: {
+                semaphore.signal()
+            })
+            semaphore.wait()
             result(nil)
         case "isTrackingActive":
-            result(isTrackingActive())
+            let isTrackingActive = motionTag.isTrackingActive
+            result(isTrackingActive)
         default:
-            result(FlutterError(code: "UNKNOWN_METHOD", message: "Unknown method \(call.method)", details: nil))
+            let error = FlutterError(code: "UNKNOWN_METHOD", message: "Unknown method \(call.method)", details: nil)
+            result(error)
         }
     }
-    
-    private func getUserToken() -> String? {
-        return motionTag.userToken
+}
+
+public class MotionTagDelegateWrapper: NSObject, MotionTagDelegate {
+
+    public static let sharedInstance = MotionTagDelegateWrapper()
+    public weak var channel: FlutterMethodChannel? = nil
+
+    private override init() {
     }
-    
-    private func setUserToken(userToken: String) {
-        motionTag.userToken = userToken
-    }
-    
-    private func start() {
-        motionTag.start()
-    }
-    
-    private func stop() {
-        motionTag.stop()
-    }
-    
-    private func clearData() {
-        let semaphore = DispatchSemaphore(value: 0)
-        motionTag.clearData(completionHandler: {
-            semaphore.signal()
-        })
-        semaphore.wait()
-    }
-    
-    private func isTrackingActive() -> Bool {
-        return motionTag.isTrackingActive
-    }
-    
+
     public func trackingStatusChanged(_ isTracking: Bool) {
-        didEventOccur(isTracking ? "STARTED" : "STOPPED")
+        let arguments = isTracking ? ["type": "STARTED"] : ["type": "STOPPED"]
+        didEventOccur(arguments)
     }
-    
+
+    public func locationAuthorizationStatusDidChange(_ status: CLAuthorizationStatus, precise: Bool) {
+        // Ignored
+    }
+
+    public func motionActivityAuthorized(_ authorized: Bool) {
+        // Ignored
+    }
+
     public func didTrackLocation(_ location: CLLocation) {
-        didEventOccur("LOCATION")
+        let arguments: [String: Any] = ["type": "LOCATION",
+                                        "timestamp": location.timestamp.timestampMs,
+                                        "latitude": location.coordinate.latitude,
+                                        "longitude": location.coordinate.longitude,
+                                        "horizontalAccuracy": location.horizontalAccuracy,
+                                        "speed": location.speed < 0 ? nil : location.speed,
+                                        "altitude": location.verticalAccuracy <= 0 ? nil : location.altitude,
+                                        "bearing": location.course < 0 ? nil : location.course]
+        didEventOccur(arguments)
     }
-    
+
     public func dataUploadWithTracked(from startDate: Date, to endDate: Date, didCompleteWithError error: Error?) {
-        didEventOccur(error == nil ? "TRANSMISSION_SUCCESS" : "TRANSMISSION_ERROR")
+        var arguments: [String: Any]
+        if let error = error {
+            arguments = ["type": "TRANSMISSION_ERROR",
+                         "error": error.localizedDescription]
+        } else {
+            arguments = ["type": "TRANSMISSION_SUCCESS",
+                         "trackedFrom": startDate.timestampMs,
+                         "trackedTo": endDate.timestampMs]
+        }
+        didEventOccur(arguments)
     }
-    
-    private func didEventOccur(_ type: String) {
-        channel.invokeMethod("onEvent", arguments: ["type": type])
+
+    private func didEventOccur(_ arguments: [String: Any]) {
+        channel?.invokeMethod("onEvent", arguments: arguments)
+    }
+}
+
+private extension Date {
+
+    var timestampMs: Int {
+        Int(self.timeIntervalSince1970 * 1_000)
     }
 }

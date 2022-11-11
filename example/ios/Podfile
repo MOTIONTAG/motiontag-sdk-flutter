@@ -1,5 +1,5 @@
 # Uncomment this line to define a global platform for your project
-platform :ios, '11.0'
+platform :ios, '12.3'
 
 # CocoaPods analytics sends network stats synchronously affecting flutter build latency.
 ENV['COCOAPODS_DISABLE_STATS'] = 'true'
@@ -39,11 +39,6 @@ post_install do |installer|
     flutter_additional_ios_build_settings(target)
 
     target.build_configurations.each do |config|
-      # It is required because MotionTag is compiled only for
-      # iphonesimulator-x86_64, and not iphonesimulator-arm64
-      # https://milanpanchal24.medium.com/xcode-12-building-for-ios-simulator-but-linking-in-object-file-built-for-ios-file-for-8c0cc28ec832
-      config.build_settings["EXCLUDED_ARCHS[sdk=iphonesimulator*]"] = "arm64"
-
       # https://pub.dev/packages/permission_handler#setup
       config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] ||= [
         '$(inherited)',
@@ -59,4 +54,4 @@ post_install do |installer|
   end
 end
 
-pod 'MotionTagSDK', :git => 'https://github.com/MOTIONTAG/motiontag-sdk-ios-releases.git', :tag => 'v/4.2.1'
+pod 'MotionTagSDK', '~> 5.0.0'

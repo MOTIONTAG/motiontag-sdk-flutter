@@ -1,16 +1,16 @@
 group 'de.motiontag.fluttertracker'
-version '1.0.0'
+version '1.0-SNAPHOT'
 
 buildscript {
-    ext.kotlin_version = '1.5.20'
-    ext.motiontag_version = '6.1.1'
+    ext.kotlin_version = '1.6.21'
+    ext.motiontag_version = '7.0.0'
     repositories {
         google()
         mavenCentral()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.1.3'
+        classpath 'com.android.tools.build:gradle:7.1.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -27,13 +27,14 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 33
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
     defaultConfig {
-        minSdkVersion 21
+        minSdkVersion 23
+        targetSdkVersion 33
     }
 
     compileOptions {

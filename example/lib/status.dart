@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
-import 'package:motiontag/motiontag.dart';
-import 'package:motiontag_example/logs.dart';
+import 'package:motiontag_sdk/motiontag.dart';
+import 'package:motiontag_sdk_example/logs.dart';
 
 class Status extends StatefulWidget {
   static final _globalKey = GlobalKey<StatusState>();

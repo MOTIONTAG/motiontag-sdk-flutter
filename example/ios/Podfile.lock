@@ -2,45 +2,41 @@ PODS:
   - Flutter (1.0.0)
   - integration_test (0.0.1):
     - Flutter
-  - motiontag (1.0.0):
+  - motiontag_sdk (1.0.0):
     - Flutter
-    - MotionTagSDK (= 4.2.1)
-  - MotionTagSDK (4.2.1)
-  - "permission_handler (5.1.0+2)":
+    - MotionTagSDK (= 5.0.0)
+  - MotionTagSDK (5.0.0)
+  - permission_handler_apple (9.0.4):
     - Flutter
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
   - integration_test (from `.symlinks/plugins/integration_test/ios`)
-  - motiontag (from `.symlinks/plugins/motiontag/ios`)
-  - MotionTagSDK (from `https://github.com/MOTIONTAG/motiontag-sdk-ios-releases.git`, tag `v/4.2.1`)
-  - permission_handler (from `.symlinks/plugins/permission_handler/ios`)
+  - motiontag_sdk (from `.symlinks/plugins/motiontag_sdk/ios`)
+  - MotionTagSDK (~> 5.0.0)
+  - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
+
+SPEC REPOS:
+  trunk:
+    - MotionTagSDK
 
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
   integration_test:
     :path: ".symlinks/plugins/integration_test/ios"
-  motiontag:
-    :path: ".symlinks/plugins/motiontag/ios"
-  MotionTagSDK:
-    :git: https://github.com/MOTIONTAG/motiontag-sdk-ios-releases.git
-    :tag: v/4.2.1
-  permission_handler:
-    :path: ".symlinks/plugins/permission_handler/ios"
-
-CHECKOUT OPTIONS:
-  MotionTagSDK:
-    :git: https://github.com/MOTIONTAG/motiontag-sdk-ios-releases.git
-    :tag: v/4.2.1
+  motiontag_sdk:
+    :path: ".symlinks/plugins/motiontag_sdk/ios"
+  permission_handler_apple:
+    :path: ".symlinks/plugins/permission_handler_apple/ios"
 
 SPEC CHECKSUMS:
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   integration_test: a1e7d09bd98eca2fc37aefd79d4f41ad37bdbbe5
-  motiontag: e00ee665616017b28e86735debe7bc2bb8cf69f0
-  MotionTagSDK: f580bf3ba46c3e96ea0a7e75d8be246fa9486ffc
-  permission_handler: ccb20a9fad0ee9b1314a52b70b76b473c5f8dab0
+  motiontag_sdk: 453f9636b612c15fbc63ff8b75e75f0367a18fcc
+  MotionTagSDK: fb83d681d453cf7cf9e3b6aca7499c377fe9293e
+  permission_handler_apple: 44366e37eaf29454a1e7b1b7d736c2cceaeb17ce
 
-PODFILE CHECKSUM: e1820c3445566a6925ab3a878ae94d9246ad1dcd
+PODFILE CHECKSUM: 6becabb0deebaf8915a6cfb480d3bbd7e13745c7
 
 COCOAPODS: 1.11.3
