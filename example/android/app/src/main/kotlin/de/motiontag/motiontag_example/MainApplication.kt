@@ -8,11 +8,11 @@ import android.os.Build
 import androidx.core.app.NotificationCompat
 import de.motiontag.fluttertracker.MotionTagWrapper
 
-private const val NOTIFICATION_CHANNEL_ID = "motiontag"
-private const val NOTIFICATION_CHANNEL_NAME = "MotionTag"
-private const val NOTIFICATION_CHANNEL_DESCRIPTION = "Test MotionTag notification channel"
-private const val NOTIFICATION_CONTENT_TITLE = "MotionTag"
-private const val NOTIFICATION_CONTENT_TEXT = "tracking"
+private const val NOTIFICATION_CHANNEL_ID = "MOTIONTAG"
+private const val NOTIFICATION_CHANNEL_NAME = "MOTIONTAG"
+private const val NOTIFICATION_CHANNEL_DESCRIPTION = "MOTIONTAG SDK example notification channel"
+private const val NOTIFICATION_CONTENT_TITLE = "MOTIONTAG SDK example"
+private const val NOTIFICATION_CONTENT_TEXT = "Tracking is active"
 
 class MainApplication : Application() {
 
@@ -48,6 +48,7 @@ class MainApplication : Application() {
     return NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
       .setContentTitle(NOTIFICATION_CONTENT_TITLE)
       .setContentText(NOTIFICATION_CONTENT_TEXT)
+      .setSmallIcon(R.drawable.ic_foreground_notification)
       .setPriority(NotificationCompat.PRIORITY_LOW)
       .build()
   }

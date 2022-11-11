@@ -13,7 +13,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('MOTIONTAG SDK example app'),
+          title: const Text('MOTIONTAG SDK example'),
         ),
         body: SizedBox.expand(
           child: Padding(
