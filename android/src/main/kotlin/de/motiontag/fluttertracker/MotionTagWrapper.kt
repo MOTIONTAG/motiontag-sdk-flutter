@@ -9,9 +9,7 @@ object MotionTagWrapper {
     fun initialize(
         application: Application,
         notification: android.app.Notification,
-        isWifiOnlyDataTransfer: Boolean
     ) {
         motionTag.initialize(application, notification, MotionTagCallbackDelegate)
-        motionTag.wifiOnlyDataTransfer = isWifiOnlyDataTransfer
     }
 }

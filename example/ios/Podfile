@@ -1,5 +1,5 @@
 # Uncomment this line to define a global platform for your project
-platform :ios, '12.3'
+# platform :ios, '11.0'
 
 # CocoaPods analytics sends network stats synchronously affecting flutter build latency.
 ENV['COCOAPODS_DISABLE_STATS'] = 'true'
@@ -49,9 +49,6 @@ post_install do |installer|
         # dart: PermissionGroup.sensors
         'PERMISSION_SENSORS=1'
       ]
-
     end
   end
 end
-
-pod 'MotionTagSDK', '~> 5.0.0'
