@@ -10,7 +10,6 @@ import 'events/stopped_event.dart';
 import 'events/transmission_error_event.dart';
 import 'events/transmission_success_event.dart';
 
-// TODO: Update method description comments
 class MotionTag {
   static final instance = MotionTag._();
 
@@ -27,22 +26,19 @@ class MotionTag {
   void setObserver(void Function(MotionTagEvent event)? observer) =>
       _observer = observer;
 
-  /// Retrieves the current user token or `null` if not specified yet.
+  /// Retrieves the current user token (JWT) or `null` if not specified yet.
   Future<String?> getUserToken() async {
     return await _channel.invokeMethod('getUserToken');
   }
 
-  /// Updates the user JWT.
+  /// Updates the user token (JWT).
   ///
-  /// The SDK expects this function to be called at least once before executing the [start] function. The provided token
-  /// will be persisted internally.
+  /// The SDK expects this function to be called before executing the [start] function, otherwise the collected data won't be able to be transmitted.
   Future<void> setUserToken(String userToken) async {
     await _channel.invokeMethod('setUserToken', {'userToken': userToken});
   }
 
   /// Starts tracking.
-  ///
-  /// The callback submitted to [initialize] will be called to inform about SDK state changes or relevant tracking events.
   Future<void> start() async {
     final isTrackingActiveBefore = await isTrackingActive();
     await _channel.invokeMethod('start');
@@ -53,7 +49,7 @@ class MotionTag {
     }
   }
 
-  /// Stops tracking and removes the foreground notification.
+  /// Stops tracking.
   Future<void> stop() async {
     final isTrackingActiveBefore = await isTrackingActive();
     await _channel.invokeMethod('stop');
@@ -64,7 +60,7 @@ class MotionTag {
     }
   }
 
-  /// Stops tracking and deletes all stored user data from the SDK.
+  /// Deletes all stored user data from the SDK.
   Future<void> clearData() async {
     await _channel.invokeMethod('clearData');
   }

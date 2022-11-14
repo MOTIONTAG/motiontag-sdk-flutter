@@ -79,7 +79,7 @@ class ControlsState extends State<Controls> {
   @override
   Widget build(BuildContext context) {
     return ControlsLayout(
-      interactionEnabled: true, // TODO remove feature
+      interactionEnabled: true,
       onSetUserToken: _onSetUserToken,
       onStart: _onStart,
       onStop: _onStop,
