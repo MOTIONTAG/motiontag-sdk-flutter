@@ -14,23 +14,19 @@ private const val NOTIFICATION_CHANNEL_DESCRIPTION = "MOTIONTAG SDK example noti
 private const val NOTIFICATION_CONTENT_TITLE = "MOTIONTAG SDK example"
 private const val NOTIFICATION_CONTENT_TEXT = "Tracking is active"
 
+// This class must be registered in the AndroidManifest.xml
+// https://developer.android.com/reference/android/app/Application
 class MainApplication : Application() {
 
   override fun onCreate() {
     super.onCreate()
 
-    // The MotionTag Android SDK must be initialized here.
-    MotionTagWrapper.initialize(
-      this,
-      isWifiOnlyDataTransfer = false,
-      notification = createNotificationAndNotificationChannel()
-    )
+    // The MOTIONTAG Android SDK must be initialized here.
+    MotionTagWrapper.initialize(this, notification = createNotificationAndNotificationChannel())
   }
 
-  /**
-   * Creates a [Notification] and a [NotificationChannel] if it is required by the current Android
-   * level
-   */
+
+ // Creates a Notification and a NotificationChannel that will be displayed when the device is actively collecting sensor information
   private fun createNotificationAndNotificationChannel(): Notification {
     // On newer Android we need a NotificationChannel first
     // https://developer.android.com/training/notify-user/channels
