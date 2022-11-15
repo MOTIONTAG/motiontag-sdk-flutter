@@ -1,5 +1,9 @@
 # MOTIONTAG SDK Flutter Plugin
 
+[![pub package](https://img.shields.io/pub/v/motiontag_sdk.svg)](https://pub.dartlang.org/packages/motiontag_sdk)
+[![Build Status](https://dev.azure.com/motiontag/public/_apis/build/status/Flutter/Test/%5BFlutter%5D%20%5BTest%5D%20MOTIONTAG%20SDK?branchName=main)](https://dev.azure.com/motiontag/public/_build/latest?definitionId=21&branchName=main)
+
+
 The MOTIONTAG Mobility & Location Analytics SDK enables to collect raw sensor data of the telephone in
 a battery efficient way. This data is then transmitted to the MOTIONTAG back-end system (ISO 27001 certified).
 In the backend, the sensor events are processed and a partial journey is constructed. Journeys consist
