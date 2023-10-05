@@ -11,6 +11,7 @@ import de.motiontag.tracker.LocationEvent
 import de.motiontag.tracker.MotionTag
 import de.motiontag.tracker.PowerSaveModeChangedEvent
 import de.motiontag.tracker.TransmissionEvent
+import de.motiontag.tracker.BeaconScanEvent
 
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodCall
@@ -63,6 +64,7 @@ class MotionTagPlugin : FlutterPlugin, MethodCallHandler {
                 }
                 is BatteryOptimizationsChangedEvent -> {}
                 is PowerSaveModeChangedEvent -> {}
+                is BeaconScanEvent -> {}
             }
         }
 
