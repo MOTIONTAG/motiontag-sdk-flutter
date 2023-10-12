@@ -63,6 +63,7 @@ class MotionTagPlugin : FlutterPlugin, MethodCallHandler {
                 }
                 is BatteryOptimizationsChangedEvent -> {}
                 is PowerSaveModeChangedEvent -> {}
+                else -> {}
             }
         }
 
