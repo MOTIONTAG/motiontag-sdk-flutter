@@ -3,7 +3,7 @@ version '1.0-SNAPHOT'
 
 buildscript {
     ext.kotlin_version = '1.6.21'
-    ext.motiontag_version = '7.1.0'
+    ext.motiontag_version = '7.1.4'
     repositories {
         google()
         mavenCentral()
