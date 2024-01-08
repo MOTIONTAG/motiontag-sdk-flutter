@@ -1,6 +1,6 @@
 name: motiontag_sdk
 description: The Flutter MOTIONTAG SDK It allows embedding the MOTIONTAG detection intelligence into Flutter mobile application.
-version: 0.1.3
+version: 0.1.4
 homepage: https://motion-tag.com/developers
 repository: https://github.com/MOTIONTAG/motiontag-sdk-flutter
 
