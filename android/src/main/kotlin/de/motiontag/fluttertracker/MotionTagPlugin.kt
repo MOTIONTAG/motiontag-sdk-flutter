@@ -110,7 +110,9 @@ class MotionTagPlugin : FlutterPlugin, MethodCallHandler {
                     result.success(wifiOnlyDataTransfer)
                 }
                 "setWifiOnlyDataTransfer" -> {
-                    motionTag.wifiOnlyDataTransfer = call.argument<Boolean>("wifiOnlyDataTransfer")
+                    val isEnabled = call.argument<Boolean>("wifiOnlyDataTransfer")
+                    if (isEnabled != null)
+                        motionTag.wifiOnlyDataTransfer = isEnabled
                     result.success(null)
                 }
                 "start" -> {
