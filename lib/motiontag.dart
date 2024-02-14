@@ -45,7 +45,8 @@ class MotionTag {
 
   /// Updates the wifiOnlyDataTransfer value.
   Future<void> setWifiOnlyDataTransfer(bool wifiOnlyDataTransfer) async {
-    await _channel.invokeMethod('setWifiOnlyDataTransfer', {'wifiOnlyDataTransfer': wifiOnlyDataTransfer});
+    await _channel.invokeMethod('setWifiOnlyDataTransfer',
+        {'wifiOnlyDataTransfer': wifiOnlyDataTransfer});
   }
 
   /// Starts tracking.
