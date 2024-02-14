@@ -50,6 +50,32 @@ void main() {
     }, timeout: defaultTimeout);
   });
 
+  group('calling getWifiOnlyDataTransfer method', () {
+    testWidgets('should return value using channel', (tester) async {
+      channelMock.mockMethod('getWifiOnlyDataTransfer', returnValues: [true]);
+
+      final wifiOnlyDataTransfer = await motionTag.getWifiOnlyDataTransfer();
+
+      var calls = channelMock.methodCalls;
+      expect(calls.length, 1);
+      expect(calls.first.method, 'getWifiOnlyDataTransfer');
+      expect(wifiOnlyDataTransfer, true);
+    }, timeout: defaultTimeout);
+  });
+
+  group('calling setWifiOnlyDataTransfer method', () {
+    testWidgets('should set value using channel', (tester) async {
+      channelMock.mockMethod('setWifiOnlyDataTransfer');
+
+      await motionTag.setWifiOnlyDataTransfer(true);
+
+      var calls = channelMock.methodCalls;
+      expect(calls.length, 1);
+      expect(calls.first.method, 'setWifiOnlyDataTransfer');
+      expect(calls.first.arguments['wifiOnlyDataTransfer'], true);
+    }, timeout: defaultTimeout);
+  });
+
   group('calling start method', () {
     testWidgets('should use channel', (tester) async {
       channelMock.mockMethod('isTrackingActive', returnValues: [true]);
