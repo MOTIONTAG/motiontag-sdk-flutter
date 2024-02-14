@@ -28,13 +28,13 @@ class ChannelMock {
   }
 
   void registerCallHandler() {
-    TestDefaultBinaryMessengerBinding.instance?.defaultBinaryMessenger
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
         .setMockMethodCallHandler(
             _channel, (MethodCall methodCall) => handler(methodCall));
   }
 
   void unregisterCallHandler() {
-    TestDefaultBinaryMessengerBinding.instance?.defaultBinaryMessenger
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
         .setMockMethodCallHandler(_channel, null);
   }
 
