@@ -19,6 +19,9 @@ class StatusState extends State<Status> {
   bool _isRefetching = false;
   String? _userToken;
   bool? _isTrackingActive;
+  bool? _isPowerSaveModeEnabled;
+  bool? _isBatteryOptimisationEnabled;
+  bool? _isWifiOnlyDataTransferEnabled;
 
   @override
   void initState() {
@@ -42,11 +45,20 @@ class StatusState extends State<Status> {
 
     final userToken = await _motionTag.getUserToken();
     final isTrackingActive = await _motionTag.isTrackingActive();
+    final isPowerSaveModeEnabled = await _motionTag.isPowerSaveModeEnabled();
+    final isBatteryOptimisationEnabled =
+        await _motionTag.isBatteryOptimizationsEnabled();
+    final isWifiOnlyDataTransferEnabled =
+        await _motionTag.getWifiOnlyDataTransfer();
+
 
     setState(() {
       _isRefetching = false;
       _userToken = userToken;
       _isTrackingActive = isTrackingActive;
+      _isPowerSaveModeEnabled = isPowerSaveModeEnabled;
+      _isBatteryOptimisationEnabled = isBatteryOptimisationEnabled;
+      _isWifiOnlyDataTransferEnabled = isWifiOnlyDataTransferEnabled;
     });
   }
 
@@ -59,6 +71,12 @@ class StatusState extends State<Status> {
         StatusProperty('userToken', _userToken, isLoading: isLoading),
         StatusProperty('isTrackingActive', _isTrackingActive?.toString(),
             isLoading: isLoading),
+        StatusProperty('isPowerSaveModeEnabled', _isPowerSaveModeEnabled?.toString(),
+            isLoading: isLoading),
+        StatusProperty('isBatteryOptimisationEnabled', _isBatteryOptimisationEnabled?.toString(),
+            isLoading: isLoading),
+        StatusProperty('isWifiOnlyDataTransferEnabled', _isWifiOnlyDataTransferEnabled?.toString(),
+            isLoading: isLoading)
       ],
     );
   }
