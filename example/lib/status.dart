@@ -52,7 +52,6 @@ class StatusState extends State<Status> {
     final isWifiOnlyDataTransferEnabled =
         await _motionTag.getWifiOnlyDataTransfer();
 
-
     setState(() {
       _isRefetching = false;
       _userToken = userToken;
@@ -73,12 +72,15 @@ class StatusState extends State<Status> {
         StatusProperty('isTrackingActive', _isTrackingActive?.toString(),
             isLoading: isLoading),
         if (defaultTargetPlatform == TargetPlatform.android)
-        StatusProperty('isPowerSaveModeEnabled', _isPowerSaveModeEnabled?.toString(),
-            isLoading: isLoading),
+          StatusProperty(
+              'isPowerSaveModeEnabled', _isPowerSaveModeEnabled?.toString(),
+              isLoading: isLoading),
         if (defaultTargetPlatform == TargetPlatform.android)
-        StatusProperty('isBatteryOptimisationEnabled', _isBatteryOptimisationEnabled?.toString(),
-            isLoading: isLoading),
-        StatusProperty('isWifiOnlyDataTransferEnabled', _isWifiOnlyDataTransferEnabled?.toString(),
+          StatusProperty('isBatteryOptimisationEnabled',
+              _isBatteryOptimisationEnabled?.toString(),
+              isLoading: isLoading),
+        StatusProperty('isWifiOnlyDataTransferEnabled',
+            _isWifiOnlyDataTransferEnabled?.toString(),
             isLoading: isLoading)
       ],
     );
