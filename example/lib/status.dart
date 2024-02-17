@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:motiontag_sdk/motiontag.dart';
 import 'package:motiontag_sdk_example/logs.dart';
@@ -71,8 +72,10 @@ class StatusState extends State<Status> {
         StatusProperty('userToken', _userToken, isLoading: isLoading),
         StatusProperty('isTrackingActive', _isTrackingActive?.toString(),
             isLoading: isLoading),
+        if (defaultTargetPlatform == TargetPlatform.android)
         StatusProperty('isPowerSaveModeEnabled', _isPowerSaveModeEnabled?.toString(),
             isLoading: isLoading),
+        if (defaultTargetPlatform == TargetPlatform.android)
         StatusProperty('isBatteryOptimisationEnabled', _isBatteryOptimisationEnabled?.toString(),
             isLoading: isLoading),
         StatusProperty('isWifiOnlyDataTransferEnabled', _isWifiOnlyDataTransferEnabled?.toString(),
