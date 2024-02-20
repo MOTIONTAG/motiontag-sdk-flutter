@@ -24,8 +24,9 @@ stages:
 
           - template: templates/prepare-machine.yml
 
-          - name: Verify formatting
-            run: dart format --output=none --set-exit-if-changed .
+          - script: |
+              dart format --output=none --set-exit-if-changed .
+            displayName: 'Verify formatting'
 
           - task: FlutterCommand@0
             displayName: 'Analyze code'
