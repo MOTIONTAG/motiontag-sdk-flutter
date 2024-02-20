@@ -45,7 +45,8 @@ class ChannelMock {
   void invokeMethod(String methodName, {dynamic arguments}) {
     var codec = StandardMethodCodec();
     var call = codec.encodeMethodCall(MethodCall(methodName, arguments));
-    ServicesBinding.instance.channelBuffers.push(_channelName, call, (ByteData? data){});
+    ServicesBinding.instance.channelBuffers
+        .push(_channelName, call, (ByteData? data) {});
   }
 
   void reset() {
