@@ -24,11 +24,9 @@ stages:
 
           - template: templates/prepare-machine.yml
 
-          - task: FlutterCommand@0
-            displayName: 'Check code format'
-            inputs:
-              arguments: 'format --set-exit-if-changed .'
-              projectDirectory: '.'
+          - script: |
+              dart format --output=none --set-exit-if-changed .
+              displayName: 'Verify formatting'
 
           - task: FlutterCommand@0
             displayName: 'Analyze code'

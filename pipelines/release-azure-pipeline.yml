@@ -1,10 +1,10 @@
 name: Release
 
-on:
-  push:
-    branches:
-      - main
-    workflow_dispatch:
+pr: none
+trigger:
+  tags:
+    include:
+      - '*'
 
 jobs:
   build:
