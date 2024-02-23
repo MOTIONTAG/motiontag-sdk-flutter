@@ -105,6 +105,16 @@ class MotionTagPlugin : FlutterPlugin, MethodCallHandler {
                     motionTag.userToken = call.argument<String?>("userToken")
                     result.success(null)
                 }
+                "getWifiOnlyDataTransfer" -> {
+                    val wifiOnlyDataTransfer = motionTag.wifiOnlyDataTransfer
+                    result.success(wifiOnlyDataTransfer)
+                }
+                "setWifiOnlyDataTransfer" -> {
+                    val isEnabled = call.argument<Boolean>("wifiOnlyDataTransfer")
+                    if (isEnabled != null)
+                        motionTag.wifiOnlyDataTransfer = isEnabled
+                    result.success(null)
+                }
                 "start" -> {
                     motionTag.start()
                     result.success(null)
@@ -121,6 +131,14 @@ class MotionTagPlugin : FlutterPlugin, MethodCallHandler {
                 "isTrackingActive" -> {
                     val isTrackingActive = motionTag.isTrackingActive
                     result.success(isTrackingActive)
+                }
+                "isPowerSaveModeEnabled" -> {
+                    val isPowerSaveModeEnabled = motionTag.isPowerSaveModeEnabled
+                    result.success(isPowerSaveModeEnabled)
+                }
+                "isBatteryOptimizationsEnabled" -> {
+                    val isBatteryOptimizationsEnabled = motionTag.isBatteryOptimizationsEnabled
+                    result.success(isBatteryOptimizationsEnabled)
                 }
                 else -> result.notImplemented()
             }

@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:toggle_switch/toggle_switch.dart';
 import 'package:motiontag_sdk/motiontag.dart';
 import 'package:motiontag_sdk_example/logs.dart';
 import 'package:motiontag_sdk_example/status.dart';
@@ -34,6 +35,14 @@ class ControlsState extends State<Controls> {
         function: () => _motionTag.setUserToken(userToken),
       );
 
+  void _onSetWifiOnlyDataTransfer(bool wifiOnlyDataTransfer) =>
+      _executeInteraction(
+        logMessage:
+            'Updating the wifi only data transfer to $wifiOnlyDataTransfer',
+        function: () =>
+            _motionTag.setWifiOnlyDataTransfer(wifiOnlyDataTransfer),
+      );
+
   void _onStart() async => _executeInteraction(
         logMessage: 'Starting the SDK',
         function: () => _motionTag.start(),
@@ -63,14 +72,17 @@ class ControlsState extends State<Controls> {
         name: 'activity recognition',
         permission: Permission.activityRecognition,
       );
+
   void _onRequestLocationInUsePermission() => _requestPermission(
         name: 'location (in use)',
         permission: Permission.locationWhenInUse,
       );
+
   void _onRequestLocationAlwaysPermission() => _requestPermission(
         name: 'location (always)',
         permission: Permission.locationAlways,
       );
+
   void _onRequestMotionSensorPermission() => _requestPermission(
         name: 'motion',
         permission: Permission.sensors,
@@ -81,6 +93,7 @@ class ControlsState extends State<Controls> {
     return ControlsLayout(
       interactionEnabled: true,
       onSetUserToken: _onSetUserToken,
+      onSetWifiOnlyDataTransfer: _onSetWifiOnlyDataTransfer,
       onStart: _onStart,
       onStop: _onStop,
       onClearData: _onClearData,
@@ -96,6 +109,7 @@ class ControlsState extends State<Controls> {
 class ControlsLayout extends StatelessWidget {
   final bool interactionEnabled;
   final void Function(String userToken) onSetUserToken;
+  final void Function(bool wifiOnlyDataTransfer) onSetWifiOnlyDataTransfer;
   final VoidCallback onStart;
   final VoidCallback onStop;
   final VoidCallback onClearData;
@@ -107,6 +121,7 @@ class ControlsLayout extends StatelessWidget {
   const ControlsLayout({
     required this.interactionEnabled,
     required this.onSetUserToken,
+    required this.onSetWifiOnlyDataTransfer,
     required this.onStart,
     required this.onStop,
     required this.onClearData,
@@ -129,12 +144,27 @@ class ControlsLayout extends StatelessWidget {
           spacing: 20,
           alignment: WrapAlignment.center,
           children: [
-            if (defaultTargetPlatform == TargetPlatform.android)
-              ActionButton(
-                enabled: interactionEnabled,
-                text: 'Activity recognition',
-                onPressed: onRequestActivityRecognitionPermission,
-              ),
+            Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+              Text("Wifi Only Transfer"),
+              ToggleSwitch(
+                initialLabelIndex: 0,
+                totalSwitches: 2,
+                labels: ['On', 'Off'],
+                activeBgColor: <Color>[Colors.green],
+                onToggle: (index) {
+                  if (index == 0) {
+                    onSetWifiOnlyDataTransfer(true);
+                  } else {
+                    onSetWifiOnlyDataTransfer(false);
+                  }
+                },
+              )
+            ]),
+            ActionButton(
+              enabled: interactionEnabled,
+              text: 'Activity recognition',
+              onPressed: onRequestActivityRecognitionPermission,
+            ),
             if (defaultTargetPlatform == TargetPlatform.iOS)
               ActionButton(
                 enabled: interactionEnabled,
