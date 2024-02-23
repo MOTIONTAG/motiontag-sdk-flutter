@@ -26,7 +26,7 @@ stages:
 
           - script: |
               dart format --output=none --set-exit-if-changed .
-              displayName: 'Verify formatting'
+            displayName: 'Verify formatting'
 
           - task: FlutterCommand@0
             displayName: 'Analyze code'
