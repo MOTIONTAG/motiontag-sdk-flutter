@@ -1,0 +1,30 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+    workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - template: templates/prepare-machine.yml
+
+      - name: Setup Pub Credentials
+        shell: bash
+        env:
+          PUB_DEV_PUBLISH_ACCESS_TOKEN: $(AZURE_ARTIFACTS_ACCESS_TOKEN)
+          PUB_DEV_PUBLISH_REFRESH_TOKEN: $(AZURE_ARTIFACTS_REFRESH_TOKEN)
+          PUB_DEV_PUBLISH_TOKEN_ENDPOINT: $(AZURE_ARTIFACTS_TOKEN_ENDPOINT)
+          PUB_DEV_PUBLISH_EXPIRATION: $(AZURE_ARTIFACTS_EXPIRATION)
+        run: |
+          sh ./pub_login.sh
+
+      - name: Check Publish Warnings
+        run: pub publish --dry-run
+
+      - name: Publish Package
+        run: pub publish -f
