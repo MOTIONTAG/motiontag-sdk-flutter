@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:motiontag_sdk/motiontag.dart';
 import 'package:motiontag_sdk_example/logs.dart';
@@ -19,6 +20,9 @@ class StatusState extends State<Status> {
   bool _isRefetching = false;
   String? _userToken;
   bool? _isTrackingActive;
+  bool? _isPowerSaveModeEnabled;
+  bool? _isBatteryOptimisationEnabled;
+  bool? _isWifiOnlyDataTransferEnabled;
 
   @override
   void initState() {
@@ -42,11 +46,19 @@ class StatusState extends State<Status> {
 
     final userToken = await _motionTag.getUserToken();
     final isTrackingActive = await _motionTag.isTrackingActive();
+    final isPowerSaveModeEnabled = await _motionTag.isPowerSaveModeEnabled();
+    final isBatteryOptimisationEnabled =
+        await _motionTag.isBatteryOptimizationsEnabled();
+    final isWifiOnlyDataTransferEnabled =
+        await _motionTag.getWifiOnlyDataTransfer();
 
     setState(() {
       _isRefetching = false;
       _userToken = userToken;
       _isTrackingActive = isTrackingActive;
+      _isPowerSaveModeEnabled = isPowerSaveModeEnabled;
+      _isBatteryOptimisationEnabled = isBatteryOptimisationEnabled;
+      _isWifiOnlyDataTransferEnabled = isWifiOnlyDataTransferEnabled;
     });
   }
 
@@ -59,6 +71,17 @@ class StatusState extends State<Status> {
         StatusProperty('userToken', _userToken, isLoading: isLoading),
         StatusProperty('isTrackingActive', _isTrackingActive?.toString(),
             isLoading: isLoading),
+        if (defaultTargetPlatform == TargetPlatform.android)
+          StatusProperty(
+              'isPowerSaveModeEnabled', _isPowerSaveModeEnabled?.toString(),
+              isLoading: isLoading),
+        if (defaultTargetPlatform == TargetPlatform.android)
+          StatusProperty('isBatteryOptimisationEnabled',
+              _isBatteryOptimisationEnabled?.toString(),
+              isLoading: isLoading),
+        StatusProperty('isWifiOnlyDataTransferEnabled',
+            _isWifiOnlyDataTransferEnabled?.toString(),
+            isLoading: isLoading)
       ],
     );
   }

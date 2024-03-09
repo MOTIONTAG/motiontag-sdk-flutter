@@ -20,6 +20,7 @@ dependencies:
     path: ../
   cupertino_icons: ^1.0.5
   permission_handler: ^10.2.0
+  toggle_switch: ^2.1.0
 
 dev_dependencies:
   flutter_test:

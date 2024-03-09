@@ -28,13 +28,13 @@ class ChannelMock {
   }
 
   void registerCallHandler() {
-    TestDefaultBinaryMessengerBinding.instance?.defaultBinaryMessenger
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
         .setMockMethodCallHandler(
             _channel, (MethodCall methodCall) => handler(methodCall));
   }
 
   void unregisterCallHandler() {
-    TestDefaultBinaryMessengerBinding.instance?.defaultBinaryMessenger
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
         .setMockMethodCallHandler(_channel, null);
   }
 
@@ -45,8 +45,8 @@ class ChannelMock {
   void invokeMethod(String methodName, {dynamic arguments}) {
     var codec = StandardMethodCodec();
     var call = codec.encodeMethodCall(MethodCall(methodName, arguments));
-    ServicesBinding.instance.defaultBinaryMessenger
-        .handlePlatformMessage(_channelName, call, null);
+    ServicesBinding.instance.channelBuffers
+        .push(_channelName, call, (ByteData? data) {});
   }
 
   void reset() {

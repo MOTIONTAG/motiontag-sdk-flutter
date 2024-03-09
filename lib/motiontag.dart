@@ -38,6 +38,17 @@ class MotionTag {
     await _channel.invokeMethod('setUserToken', {'userToken': userToken});
   }
 
+  /// Retrieves the wifiOnlyDataTransfer value.
+  Future<bool> getWifiOnlyDataTransfer() async {
+    return await _channel.invokeMethod('getWifiOnlyDataTransfer');
+  }
+
+  /// Updates the wifiOnlyDataTransfer value.
+  Future<void> setWifiOnlyDataTransfer(bool wifiOnlyDataTransfer) async {
+    await _channel.invokeMethod('setWifiOnlyDataTransfer',
+        {'wifiOnlyDataTransfer': wifiOnlyDataTransfer});
+  }
+
   /// Starts tracking.
   Future<void> start() async {
     final isTrackingActiveBefore = await isTrackingActive();
@@ -68,6 +79,18 @@ class MotionTag {
   /// Returns `true` if the tracking is active and collecting data, `false` otherwise.
   Future<bool> isTrackingActive() async {
     return await _channel.invokeMethod('isTrackingActive');
+  }
+
+  /// Returns `true` if the Power save mode is enabled,
+  /// `false` otherwise.
+  Future<bool> isPowerSaveModeEnabled() async {
+    return await _channel.invokeMethod('isPowerSaveModeEnabled');
+  }
+
+  /// Returns `true` if the Battery Optimizations is enabled,
+  /// `false` otherwise.
+  Future<bool> isBatteryOptimizationsEnabled() async {
+    return await _channel.invokeMethod('isBatteryOptimizationsEnabled');
   }
 
   Future<dynamic> _methodCallHandler(MethodCall call) async {

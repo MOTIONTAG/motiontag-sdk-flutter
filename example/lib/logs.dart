@@ -47,7 +47,7 @@ class LogsState extends State<Logs> {
 
   void _scrollToEnd() {
     WidgetsBinding.instance.addPostFrameCallback((_) =>
-        {_scrollController.jumpTo(_scrollController.position.maxScrollExtent)});
+        _scrollController.jumpTo(_scrollController.position.maxScrollExtent));
   }
 
   @override

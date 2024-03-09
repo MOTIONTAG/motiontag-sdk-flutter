@@ -29,6 +29,13 @@ public class SwiftMotionTagPlugin: NSObject, FlutterPlugin {
             let args = call.arguments as! Dictionary<String, Any>
             motionTag.userToken = args["userToken"] as! String
             result(nil)
+        case "getWifiOnlyDataTransfer":
+            let wifiOnlyDataTransfer = motionTag.wifiOnlyDataTransfer
+            result(wifiOnlyDataTransfer)
+        case "setWifiOnlyDataTransfer":
+            let args = call.arguments as! Dictionary<Boolean, Any>
+            motionTag.wifiOnlyDataTransfer = args["wifiOnlyDataTransfer"] as! Boolean
+            result(nil)
         case "start":
             motionTag.start()
             result(nil)
