@@ -10,8 +10,7 @@ public class SwiftMotionTagPlugin: NSObject, FlutterPlugin {
 
     init(channel: FlutterMethodChannel) {
         self.channel = channel
-        super.init()
-    }
+zsh:1: command not found: jjjjjjjjjj
 
     public static func register(with registrar: FlutterPluginRegistrar) {
         let channel = FlutterMethodChannel(name: "de.motiontag.tracker", binaryMessenger: registrar.messenger())
@@ -33,7 +32,7 @@ public class SwiftMotionTagPlugin: NSObject, FlutterPlugin {
             let wifiOnlyDataTransfer = motionTag.wifiOnlyDataTransfer
             result(wifiOnlyDataTransfer)
         case "setWifiOnlyDataTransfer":
-            let args = call.arguments as! Dictionary<Bool, Any>
+            let args = call.arguments as! Dictionary<String, Any>
             motionTag.wifiOnlyDataTransfer = args["wifiOnlyDataTransfer"] as! Bool
             result(nil)
         case "start":
