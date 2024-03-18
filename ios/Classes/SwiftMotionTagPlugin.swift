@@ -10,7 +10,8 @@ public class SwiftMotionTagPlugin: NSObject, FlutterPlugin {
 
     init(channel: FlutterMethodChannel) {
         self.channel = channel
-zsh:1: command not found: jjjjjjjjjj
+	super.init()
+    }
 
     public static func register(with registrar: FlutterPluginRegistrar) {
         let channel = FlutterMethodChannel(name: "de.motiontag.tracker", binaryMessenger: registrar.messenger())
