@@ -1,5 +1,6 @@
 # Build, lint and test all targets
 
+
 trigger:
   branches:
     include:

@@ -10,7 +10,7 @@ public class SwiftMotionTagPlugin: NSObject, FlutterPlugin {
 
     init(channel: FlutterMethodChannel) {
         self.channel = channel
-        super.init()
+	super.init()
     }
 
     public static func register(with registrar: FlutterPluginRegistrar) {
@@ -33,8 +33,8 @@ public class SwiftMotionTagPlugin: NSObject, FlutterPlugin {
             let wifiOnlyDataTransfer = motionTag.wifiOnlyDataTransfer
             result(wifiOnlyDataTransfer)
         case "setWifiOnlyDataTransfer":
-            let args = call.arguments as! Dictionary<Boolean, Any>
-            motionTag.wifiOnlyDataTransfer = args["wifiOnlyDataTransfer"] as! Boolean
+            let args = call.arguments as! Dictionary<String, Any>
+            motionTag.wifiOnlyDataTransfer = args["wifiOnlyDataTransfer"] as! Bool
             result(nil)
         case "start":
             motionTag.start()
