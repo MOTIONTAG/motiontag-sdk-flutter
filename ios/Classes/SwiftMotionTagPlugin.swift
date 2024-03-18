@@ -33,8 +33,8 @@ public class SwiftMotionTagPlugin: NSObject, FlutterPlugin {
             let wifiOnlyDataTransfer = motionTag.wifiOnlyDataTransfer
             result(wifiOnlyDataTransfer)
         case "setWifiOnlyDataTransfer":
-            let args = call.arguments as! Dictionary<Boolean, Any>
-            motionTag.wifiOnlyDataTransfer = args["wifiOnlyDataTransfer"] as! Boolean
+            let args = call.arguments as! Dictionary<Bool, Any>
+            motionTag.wifiOnlyDataTransfer = args["wifiOnlyDataTransfer"] as! Bool
             result(nil)
         case "start":
             motionTag.start()
