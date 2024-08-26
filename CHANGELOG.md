@@ -1,5 +1,9 @@
 # MOTIONTAG SDK Flutter Plugin changelog
 
+## Version 0.1.8 *(2024-08-26)*
+
+- Use MotionTag iOS SDK 5.2.0.
+
 ## Version 0.1.7 *(2024-04-05)*
 
 - Use MotionTag iOS SDK 5.1.7.
