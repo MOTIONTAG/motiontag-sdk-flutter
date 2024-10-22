@@ -43,11 +43,7 @@ public class SwiftMotionTagPlugin: NSObject, FlutterPlugin {
             motionTag.stop()
             result(nil)
         case "clearData":
-            let semaphore = DispatchSemaphore(value: 0)
-            motionTag.clearData(completionHandler: {
-                semaphore.signal()
-            })
-            semaphore.wait()
+            motionTag.clearData()
             result(nil)
         case "isTrackingActive":
             let isTrackingActive = motionTag.isTrackingActive

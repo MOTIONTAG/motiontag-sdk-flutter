@@ -4,9 +4,9 @@ PODS:
     - Flutter
   - motiontag_sdk (1.0.0):
     - Flutter
-    - MotionTagSDK (= 5.0.0)
-  - MotionTagSDK (5.0.0)
-  - permission_handler_apple (9.0.4):
+    - MotionTagSDK (= 6.2.0)
+  - MotionTagSDK (6.2.0)
+  - permission_handler_apple (9.1.1):
     - Flutter
 
 DEPENDENCIES:
@@ -30,12 +30,12 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/permission_handler_apple/ios"
 
 SPEC CHECKSUMS:
-  Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
-  integration_test: a1e7d09bd98eca2fc37aefd79d4f41ad37bdbbe5
-  motiontag_sdk: 453f9636b612c15fbc63ff8b75e75f0367a18fcc
-  MotionTagSDK: fb83d681d453cf7cf9e3b6aca7499c377fe9293e
-  permission_handler_apple: 44366e37eaf29454a1e7b1b7d736c2cceaeb17ce
+  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  integration_test: 252f60fa39af5e17c3aa9899d35d908a0721b573
+  motiontag_sdk: 3210d0c0fe70cd50f6c7bd3ec66cbb99cb1f00fa
+  MotionTagSDK: 0f5f89a9be540c7a3cdf49b07629d6dea17ce823
+  permission_handler_apple: e76247795d700c14ea09e3a2d8855d41ee80a2e6
 
-PODFILE CHECKSUM: c1de48438fb8aa759b5191458f7c29486b0ae8da
+PODFILE CHECKSUM: 9aedea09e33c4cfa264549ba78150b2053518cba
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.15.2
