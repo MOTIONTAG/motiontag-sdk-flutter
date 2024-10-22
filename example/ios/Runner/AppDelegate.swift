@@ -5,7 +5,7 @@ import Flutter
 import MotionTagSDK
 import motiontag_sdk
 
-@UIApplicationMain
+@main
 @objc class AppDelegate: FlutterAppDelegate {
 
     override func application(
@@ -27,6 +27,6 @@ import motiontag_sdk
             completionHandler: @escaping () -> Void) {
 
          // Add this line here to forward the events to the SDK
-         MotionTagCore.sharedInstance.handleEvents(forBackgroundURLSession: identifier, completionHandler: completionHandler)
+         MotionTagCore.sharedInstance.processBackgroundSessionEvents(with: identifier, completionHandler: completionHandler)
     }
 }
