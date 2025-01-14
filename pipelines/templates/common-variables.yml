@@ -2,4 +2,4 @@
 
 variables:
   - name: vmImage
-    value: 'macos-12'
+    value: 'macos-14'
