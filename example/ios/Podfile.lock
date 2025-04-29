@@ -4,8 +4,8 @@ PODS:
     - Flutter
   - motiontag_sdk (1.0.0):
     - Flutter
-    - MotionTagSDK (= 6.2.1)
-  - MotionTagSDK (6.2.1)
+    - MotionTagSDK (= 6.3.0)
+  - MotionTagSDK (6.3.0)
   - permission_handler_apple (9.1.1):
     - Flutter
 
@@ -31,10 +31,10 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
-  integration_test: 252f60fa39af5e17c3aa9899d35d908a0721b573
-  motiontag_sdk: 30960cbe2dbb121eac57f0a1899198bf0864af89
-  MotionTagSDK: 88caffa1b68810a779e06e4415c96c684bc75368
-  permission_handler_apple: e76247795d700c14ea09e3a2d8855d41ee80a2e6
+  integration_test: 4a889634ef21a45d28d50d622cf412dc6d9f586e
+  motiontag_sdk: a170d18bcc0ceac2b4986050e70d0ea6aaad539e
+  MotionTagSDK: 9cad29c3a7137a9d54aad8b2c4ff2cfc931a5897
+  permission_handler_apple: 3787117e48f80715ff04a3830ca039283d6a4f29
 
 PODFILE CHECKSUM: 9aedea09e33c4cfa264549ba78150b2053518cba
 
