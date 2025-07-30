@@ -13,7 +13,7 @@ steps:
       mode: 'auto'
       channel: 'stable'
       version: 'custom'
-      customVersion: '3.19.0'
+      customVersion: '3.32.8'
 
   - task: FlutterCommand@0
     displayName: 'Get dependencies'
