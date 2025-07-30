@@ -59,4 +59,5 @@ stages:
             displayName: 'Build app'
             inputs:
               arguments: 'build apk --debug'
+              options: '-Xmx4g'
               projectDirectory: 'example'

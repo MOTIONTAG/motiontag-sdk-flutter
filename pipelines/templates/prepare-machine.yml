@@ -1,9 +1,9 @@
 steps:
 
   - task: JavaToolInstaller@0
-    displayName: 'Install Java 11'
+    displayName: 'Install Java 17'
     inputs:
-      versionSpec: '11'
+      versionSpec: '17'
       jdkArchitectureOption: 'x64'
       jdkSourceOption: 'PreInstalled'
 
@@ -13,7 +13,7 @@ steps:
       mode: 'auto'
       channel: 'stable'
       version: 'custom'
-      customVersion: '3.19.0'
+      customVersion: '3.32.8'
 
   - task: FlutterCommand@0
     displayName: 'Get dependencies'
