@@ -1,11 +1,11 @@
-# MOTIONTAG SDK Flutter Plugin
+# motiontag SDK Flutter Plugin
 
 [![pub package](https://img.shields.io/pub/v/motiontag_sdk.svg)](https://pub.dartlang.org/packages/motiontag_sdk)
 [![Build Status](https://dev.azure.com/motiontag/public/_apis/build/status/Flutter/Test/%5BFlutter%5D%20%5BTest%5D%20MOTIONTAG%20SDK?branchName=main)](https://dev.azure.com/motiontag/public/_build/latest?definitionId=21&branchName=main)
 
 
-The MOTIONTAG Mobility & Location Analytics SDK enables to collect raw sensor data of the telephone in
-a battery efficient way. This data is then transmitted to the MOTIONTAG back-end system (ISO 27001 certified).
+The motiontag Mobility & Location Analytics SDK enables to collect raw sensor data of the telephone in
+a battery efficient way. This data is then transmitted to the motiontag back-end system (ISO 27001 certified).
 In the backend, the sensor events are processed and a partial journey is constructed. Journeys consist
 either solely of tracks or tracks plus stays. Tracks describe a movement from a origin to a destination with
 a certain mode of transport. Stays symbolize a stationary behaviour with a particular purpose for the visit.
@@ -16,7 +16,7 @@ This way the effectiveness of the current infrastructure and the passenger flow 
 the design of new mobility services. By implementing and using the SDK you can make use of these findings
 to improve timetables and routes, expand transport supply and attract more passengers.
 
-If you integrate the MOTIONTAG SDK inside your own application, you can either download
+If you integrate the motiontag SDK inside your own application, you can either download
 user journeys via a provided dump interface on the internet or we tailor a customized solution to
 your needs.
 
@@ -54,12 +54,12 @@ Check out [`MainApplication.kt`](https://github.com/MOTIONTAG/motiontag-sdk-flut
 
 [Auto Backup for Apps](https://developer.android.com/guide/topics/data/autobackup) is a platform feature that automatically backs up a user's data from apps that target and run on Android 6.0 (API level 23) or later.
 To limit unexpected behavior from our SDK, you should either disable automated backups entirely or exclude the appropriate SDK files from full backup.
-Please check [this section](https://api.motion-tag.de/developer/android#1-4-auto-backup-for-apps) of the native Android MOTIONTAG SDK for more information.
+Please check [this section](https://api.motion-tag.de/developer/android#1-4-auto-backup-for-apps) of the native Android motiontag SDK for more information.
 
 
 ## 2. Permission management
 
-Since the permission management is not part of the MOTIONTAG SDK, it is the app's responsibility to acquire the permissions/authorizations from the user before starting the SDK.
+Since the permission management is not part of the motiontag SDK, it is the app's responsibility to acquire the permissions/authorizations from the user before starting the SDK.
 
 The [example project](https://github.com/MOTIONTAG/motiontag-sdk-flutter/tree/main/example) demonstrates an implementation using the
 [`permission_handler`](https://pub.dev/packages/permission_handler) package.
@@ -130,13 +130,13 @@ and/or [iOS](https://api.motion-tag.de/developer/ios#6-sdk-user-authentication) 
 ## 5. Non-standard background process limitations on Android
 
 Some Android OEMs, like Huawei and OnePlus, decided to implement non-standard background process limitations on 3rd party apps as an attempt to reduce battery consumption.
-The MOTIONTAG SDK must be running all times in the background, otherwise it won't function properly.
+The motiontag SDK must be running all times in the background, otherwise it won't function properly.
 
 Therefore we recommend developers integrating our SDK to read the [https://dontkillmyapp.com](https://dontkillmyapp.com) website,
 it describes this problem in detail and it provides some workaround options for both developers and users.
 There's also [this StackOverflow post](https://stackoverflow.com/a/51726040/2983102) which describes how developers can forward users to the correct OEM settings.
 
-When battery optimization is turned on for your app, the MOTIONTAG SDK may not be able to track and generate data continuously.
+When battery optimization is turned on for your app, the motiontag SDK may not be able to track and generate data continuously.
 If 24/7 tracking on all supported phone models is crucial to your use case, we strongly recommend you to include a prompt for the user, and facilitate the deactivation of battery optimization settings for your app on the affected phones.
 
 
