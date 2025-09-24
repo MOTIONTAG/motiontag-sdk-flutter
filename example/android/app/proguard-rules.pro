@@ -1,0 +1,3 @@
+-keep,allowobfuscation,allowshrinking class *
+-keep class de.motiontag.motiontag.network.models.** { *; }
+-keepnames class **$Companion

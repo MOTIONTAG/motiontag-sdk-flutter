@@ -56,6 +56,30 @@ Check out [`MainApplication.kt`](https://github.com/MOTIONTAG/motiontag-sdk-flut
 To limit unexpected behavior from our SDK, you should either disable automated backups entirely or exclude the appropriate SDK files from full backup.
 Please check [this section](https://api.motion-tag.de/developer/android#1-4-auto-backup-for-apps) of the native Android motiontag SDK for more information.
 
+**Compatibility with Android Gradle Plugin 8.x**:
+Starting with Android Gradle Plugin 8.x (released in April 2023), **R8 full mode** is enabled by default. This change may affect your project if your ProGuard rules are not configured to accommodate the new default behavior.
+
+Reference Links:
++ [Release Notes for Android Gradle Plugin 8.0.0](https://developer.android.com/studio/releases/gradle-plugin#8-0-0)
++ [R8 FAQ](https://developer.android.com/studio/build/shrink-code#r8)
++ [Shrink, Obfuscate, and Optimize Your App](https://developer.android.com/studio/build/shrink-code)
+
+**Resolving Issues with R8 Full Mode**:
+If you encounter issues related to the default R8 full mode, you can resolve them using one of the following approaches:
+
++ **Update ProGuard Rules**  
+  Add the following rule to your `proguard-rules.pro` file:
+  ```proguard
+  -keep,allowobfuscation,allowshrinking class *
+  -keep class de.motiontag.motiontag.network.models.** { *; }
+  -keepnames class **$Companion
+  ```
+
++ **Disable R8 Full Mode**
+  Add the following property to your `gradle.properties` file:
+  ```properties
+  android.enableR8.fullMode=false
+  ```
 
 ## 2. Permission management
 
