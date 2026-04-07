@@ -29,7 +29,7 @@ import motiontag_sdk
          MotionTagCore.sharedInstance.processBackgroundSessionEvents(with: identifier, completionHandler: completionHandler)
     }
     
-    func didInitializeImplicitFlutterEngine(_ engineBridge: any FlutterImplicitEngineBridge) {
+    func didInitializeImplicitFlutterEngine(_ engineBridge: FlutterImplicitEngineBridge) {
         GeneratedPluginRegistrant.register(with: engineBridge.pluginRegistry)
     }
 }
