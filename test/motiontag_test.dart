@@ -233,8 +233,8 @@ void main() {
   group('calling isBatteryOptimizationsEnabled method', () {
     testWidgets('should return value using channel on Android', (tester) async {
       debugDefaultTargetPlatformOverride = TargetPlatform.android;
-      channelMock.mockMethod('isBatteryOptimizationsEnabled',
-          returnValues: [true]);
+      channelMock
+          .mockMethod('isBatteryOptimizationsEnabled', returnValues: [true]);
 
       final result = await motionTag.isBatteryOptimizationsEnabled();
 
