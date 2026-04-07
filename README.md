@@ -44,6 +44,10 @@ The SDK must be initialized **before** the plugin registration in the `didFinish
 The `handleEventsForBackgroundURLSession` calls must be forwarded by overriding the appropriate delegate.
 Check out [AppDelegate.swift](https://github.com/MOTIONTAG/motiontag-sdk-flutter/blob/main/example/ios/Runner/AppDelegate.swift) as an example.
 
+> **Flutter 3.41+**: UIScene lifecycle is now enabled by default. See Flutter's [UISceneDelegate migration guide](https://docs.flutter.dev/release/breaking-changes/uiscenedelegate) for the required changes to your app.
+
+For further iOS implementation details, refer to the [MOTIONTAG iOS sample app](https://github.com/MOTIONTAG/motiontag-sample-app-ios).
+
 
 ### Android
 
