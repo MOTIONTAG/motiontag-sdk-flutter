@@ -66,8 +66,10 @@
 				<dict>
 					<key>UISceneConfigurationName</key>
 					<string>flutter</string>
+					<key>UISceneClassName</key>
+					<string>UIWindowScene</string>
 					<key>UISceneDelegateClassName</key>
-					<string>$(PRODUCT_MODULE_NAME).AppSceneDelegate</string>
+					<string>FlutterSceneDelegate</string>
 					<key>UISceneStoryboardFile</key>
 					<string>Main</string>
 				</dict>
