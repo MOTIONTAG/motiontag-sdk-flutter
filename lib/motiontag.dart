@@ -82,14 +82,16 @@ class MotionTag {
   }
 
   /// Returns `true` if the Power save mode is enabled,
-  /// `false` otherwise.
+  /// `false` otherwise. Always returns `false` on iOS.
   Future<bool> isPowerSaveModeEnabled() async {
+    if (defaultTargetPlatform != TargetPlatform.android) return false;
     return await _channel.invokeMethod('isPowerSaveModeEnabled');
   }
 
   /// Returns `true` if the Battery Optimizations is enabled,
-  /// `false` otherwise.
+  /// `false` otherwise. Always returns `false` on iOS.
   Future<bool> isBatteryOptimizationsEnabled() async {
+    if (defaultTargetPlatform != TargetPlatform.android) return false;
     return await _channel.invokeMethod('isBatteryOptimizationsEnabled');
   }
 
