@@ -30,7 +30,7 @@ Minimum supported OS versions:
 
 | Android | iOS       |
 |---------|-----------|
-| API 23+ | iOS 12.3+ |
+| API 23+ | iOS 13.0+ |
 
 
 ## 1. Installation
