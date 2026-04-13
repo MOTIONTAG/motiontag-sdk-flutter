@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_activity_recognition/flutter_activity_recognition.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:motiontag_sdk/motiontag.dart';
 
@@ -16,7 +19,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   static const _userToken = '';
 
   PermissionStatus _locationStatus = PermissionStatus.denied;
-  PermissionStatus _activityStatus = PermissionStatus.denied;
+  PermissionRequestResult _activityStatus = PermissionRequestResult.DENIED;
 
   @override
   void initState() {
@@ -26,7 +29,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   Future<void> _refreshPermissions() async {
     final location = await Permission.locationAlways.status;
-    final activity = await Permission.activityRecognition.status;
+    // On iOS, checkPermission() calls queryActivityStarting which itself
+    // triggers the system dialog — skip it here and let the user tap to request.
+    final activity = Platform.isIOS
+        ? PermissionRequestResult.DENIED
+        : await FlutterActivityRecognition.instance.checkPermission();
     if (mounted) {
       setState(() {
         _locationStatus = location;
@@ -36,7 +43,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   Future<void> _requestActivity() async {
-    final status = await Permission.activityRecognition.request();
+    if (Platform.isIOS) {
+      // On iOS the permission dialog is triggered by subscribing to the stream,
+      // not by requestPermission() (which only checks the current status).
+      final sub = FlutterActivityRecognition.instance.activityStream.listen(null);
+      await Future.delayed(const Duration(milliseconds: 500));
+      await sub.cancel();
+    } else {
+      await FlutterActivityRecognition.instance.requestPermission();
+    }
+    final status = await FlutterActivityRecognition.instance.checkPermission();
     if (mounted) setState(() => _activityStatus = status);
   }
 
@@ -93,7 +109,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 icon: Icons.directions_run,
                 label: 'Motion Activity',
                 subtitle: 'Required for detecting transport mode',
-                status: _activityStatus,
+                status: _activityStatus == PermissionRequestResult.GRANTED
+                    ? PermissionStatus.granted
+                    : PermissionStatus.denied,
                 onTap: _requestActivity,
               ),
               const Spacer(),
