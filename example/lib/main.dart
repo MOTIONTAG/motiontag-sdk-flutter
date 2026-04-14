@@ -51,7 +51,7 @@ class _AppRouterState extends State<AppRouter> {
       return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
     if (_onboardingComplete!) {
-      return MainScreen(onLogout: () => setState(() => _onboardingComplete = false));
+      return const MainScreen();
     }
     return OnboardingScreen(onComplete: () => setState(() => _onboardingComplete = true));
   }

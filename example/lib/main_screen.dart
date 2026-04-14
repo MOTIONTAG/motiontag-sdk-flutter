@@ -4,9 +4,7 @@ import 'package:motiontag_sdk/events/started_event.dart';
 import 'package:motiontag_sdk/events/stopped_event.dart';
 
 class MainScreen extends StatefulWidget {
-  final VoidCallback onLogout;
-
-  const MainScreen({super.key, required this.onLogout});
+  const MainScreen({super.key});
 
   @override
   State<MainScreen> createState() => _MainScreenState();
@@ -15,6 +13,8 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   bool _isTracking = false;
   bool _wifiOnly = false;
+  final List<String> _logs = [];
+  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
@@ -26,6 +26,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   void dispose() {
     MotionTag.instance.setObserver(null);
+    _scrollController.dispose();
     super.dispose();
   }
 
@@ -41,11 +42,26 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   void _onEvent(event) {
-    if (event is StartedEvent) {
-      setState(() => _isTracking = true);
-    } else if (event is StoppedEvent) {
-      setState(() => _isTracking = false);
-    }
+    setState(() {
+      if (event is StartedEvent) {
+        _isTracking = true;
+        _logs.add('▶ Tracking started');
+      } else if (event is StoppedEvent) {
+        _isTracking = false;
+        _logs.add('■ Tracking stopped');
+      } else {
+        _logs.add(event.toString());
+      }
+    });
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (_scrollController.hasClients) {
+        _scrollController.animateTo(
+          _scrollController.position.maxScrollExtent,
+          duration: const Duration(milliseconds: 200),
+          curve: Curves.easeOut,
+        );
+      }
+    });
   }
 
   Future<void> _setTracking(bool value) async {
@@ -59,12 +75,6 @@ class _MainScreenState extends State<MainScreen> {
   Future<void> _setWifiOnly(bool value) async {
     await MotionTag.instance.setWifiOnlyDataTransfer(value);
     if (mounted) setState(() => _wifiOnly = value);
-  }
-
-  Future<void> _logout() async {
-    await MotionTag.instance.stop();
-    await MotionTag.instance.clearData();
-    widget.onLogout();
   }
 
   @override
@@ -87,7 +97,7 @@ class _MainScreenState extends State<MainScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Column(
             children: [
-              const Spacer(),
+              const SizedBox(height: 16),
 
               // Tracking status card
               Container(
@@ -120,7 +130,34 @@ class _MainScreenState extends State<MainScreen> {
                 ),
               ),
 
-              const SizedBox(height: 24),
+              const SizedBox(height: 12),
+
+              // SDK event log
+              Expanded(
+                child: Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: scheme.surfaceContainerHighest,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: _logs.isEmpty
+                      ? Text(
+                          'SDK events will appear here...',
+                          style: TextStyle(color: Colors.grey.shade500, fontSize: 12),
+                        )
+                      : ListView.builder(
+                          controller: _scrollController,
+                          itemCount: _logs.length,
+                          itemBuilder: (context, index) => Text(
+                            _logs[index],
+                            style: const TextStyle(fontSize: 12, fontFamily: 'monospace'),
+                          ),
+                        ),
+                ),
+              ),
+
+              const SizedBox(height: 12),
 
               // Tracking toggle
               _ToggleCard(
@@ -140,21 +177,6 @@ class _MainScreenState extends State<MainScreen> {
                 value: _wifiOnly,
                 onChanged: _setWifiOnly,
                 activeColor: Colors.blue,
-              ),
-
-              const Spacer(),
-
-              SizedBox(
-                width: double.infinity,
-                child: FilledButton.icon(
-                  onPressed: _logout,
-                  icon: const Icon(Icons.logout),
-                  label: const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 12),
-                    child: Text('Logout', style: TextStyle(fontSize: 16)),
-                  ),
-                  style: FilledButton.styleFrom(backgroundColor: Colors.red),
-                ),
               ),
 
               const SizedBox(height: 24),
