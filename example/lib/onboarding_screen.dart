@@ -42,7 +42,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   Future<void> _requestActivity() async {
     if (Platform.isIOS) {
-      final sub = FlutterActivityRecognition.instance.activityStream.listen(null);
+      final sub =
+          FlutterActivityRecognition.instance.activityStream.listen(null);
       await Future.delayed(const Duration(milliseconds: 500));
       await sub.cancel();
     } else {
@@ -82,7 +83,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               const Spacer(),
               Column(
                 children: [
-                  Icon(Icons.directions_walk, size: 80, color: Theme.of(context).colorScheme.primary),
+                  Icon(Icons.directions_walk,
+                      size: 80, color: Theme.of(context).colorScheme.primary),
                   const SizedBox(height: 16),
                   const Text(
                     'Welcome to\nmotiontag',
@@ -119,7 +121,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               SizedBox(
                 width: double.infinity,
                 child: FilledButton(
-                  onPressed: _locationStatus.isGranted && _activityStatus == PermissionRequestResult.GRANTED ? _getStarted : null,
+                  onPressed: _locationStatus.isGranted &&
+                          _activityStatus == PermissionRequestResult.GRANTED
+                      ? _getStarted
+                      : null,
                   child: const Padding(
                     padding: EdgeInsets.symmetric(vertical: 12),
                     child: Text('Get Started', style: TextStyle(fontSize: 16)),
@@ -177,8 +182,11 @@ class _PermissionTile extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(label, style: const TextStyle(fontWeight: FontWeight.w600)),
-                    Text(subtitle, style: TextStyle(fontSize: 12, color: Colors.grey.shade600)),
+                    Text(label,
+                        style: const TextStyle(fontWeight: FontWeight.w600)),
+                    Text(subtitle,
+                        style: TextStyle(
+                            fontSize: 12, color: Colors.grey.shade600)),
                   ],
                 ),
               ),

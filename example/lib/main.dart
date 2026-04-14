@@ -53,6 +53,7 @@ class _AppRouterState extends State<AppRouter> {
     if (_onboardingComplete!) {
       return const MainScreen();
     }
-    return OnboardingScreen(onComplete: () => setState(() => _onboardingComplete = true));
+    return OnboardingScreen(
+        onComplete: () => setState(() => _onboardingComplete = true));
   }
 }

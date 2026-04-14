@@ -87,7 +87,8 @@ class _MainScreenState extends State<MainScreen> {
         title: const Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text('motiontag SDK', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+            Text('motiontag SDK',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
             Text('flutter example app', style: TextStyle(fontSize: 12)),
           ],
         ),
@@ -103,7 +104,8 @@ class _MainScreenState extends State<MainScreen> {
               // Tracking status card
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 decoration: BoxDecoration(
                   color: scheme.surfaceContainerHighest,
                   borderRadius: BorderRadius.circular(12),
@@ -123,9 +125,9 @@ class _MainScreenState extends State<MainScreen> {
                     Text(
                       _isTracking ? 'Tracking Active' : 'Tracking Inactive',
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.w600,
-                        color: _isTracking ? null : Colors.grey,
-                      ),
+                            fontWeight: FontWeight.w600,
+                            color: _isTracking ? null : Colors.grey,
+                          ),
                     ),
                   ],
                 ),
@@ -145,14 +147,16 @@ class _MainScreenState extends State<MainScreen> {
                   child: _logs.isEmpty
                       ? Text(
                           'SDK events will appear here...',
-                          style: TextStyle(color: Colors.grey.shade500, fontSize: 12),
+                          style: TextStyle(
+                              color: Colors.grey.shade500, fontSize: 12),
                         )
                       : ListView.builder(
                           controller: _scrollController,
                           itemCount: _logs.length,
                           itemBuilder: (context, index) => Text(
                             _logs[index],
-                            style: const TextStyle(fontSize: 12, fontFamily: 'monospace'),
+                            style: const TextStyle(
+                                fontSize: 12, fontFamily: 'monospace'),
                           ),
                         ),
                 ),
