@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_activity_recognition/flutter_activity_recognition.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -29,9 +27,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   Future<void> _refreshPermissions() async {
     final location = await Permission.locationAlways.status;
-    final activity = Platform.isIOS
-        ? ActivityPermission.DENIED
-        : await FlutterActivityRecognition.instance.checkPermission();
+    final activity =
+        await FlutterActivityRecognition.instance.checkPermission();
     if (mounted) {
       setState(() {
         _locationStatus = location;
@@ -41,15 +38,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   Future<void> _requestActivity() async {
-    if (Platform.isIOS) {
-      final sub =
-          FlutterActivityRecognition.instance.activityStream.listen(null);
-      await Future.delayed(const Duration(milliseconds: 500));
-      await sub.cancel();
-    } else {
-      await FlutterActivityRecognition.instance.requestPermission();
-    }
-    final status = await FlutterActivityRecognition.instance.checkPermission();
+    final status =
+        await FlutterActivityRecognition.instance.requestPermission();
     if (mounted) setState(() => _activityStatus = status);
   }
 
