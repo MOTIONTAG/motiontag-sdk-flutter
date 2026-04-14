@@ -29,8 +29,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   Future<void> _refreshPermissions() async {
     final location = await Permission.locationAlways.status;
-    // On iOS, checkPermission() calls queryActivityStarting which itself
-    // triggers the system dialog — skip it here and let the user tap to request.
     final activity = Platform.isIOS
         ? PermissionRequestResult.DENIED
         : await FlutterActivityRecognition.instance.checkPermission();
@@ -44,8 +42,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   Future<void> _requestActivity() async {
     if (Platform.isIOS) {
-      // On iOS the permission dialog is triggered by subscribing to the stream,
-      // not by requestPermission() (which only checks the current status).
       final sub = FlutterActivityRecognition.instance.activityStream.listen(null);
       await Future.delayed(const Duration(milliseconds: 500));
       await sub.cancel();
@@ -60,7 +56,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     // iOS 13+: must grant "When In Use" before "Always" can be requested.
     var status = await Permission.locationWhenInUse.request();
     if (status.isGranted) {
-      status = await Permission.locationAlways.request();
+      await Permission.locationAlways.request();
+      // locationAlways.request() returns immediately on iOS without blocking
+      // for user input, so re-read the actual status but keep whenInUse's
+      // granted result as the fallback so the tile turns green straight away.
+      final always = await Permission.locationAlways.status;
+      if (always.isGranted) status = always;
     }
     if (mounted) setState(() => _locationStatus = status);
   }
