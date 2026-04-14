@@ -16,7 +16,7 @@ class OnboardingScreen extends StatefulWidget {
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
   // Replace with a valid token: https://api.motion-tag.de/developer/
-  static const _userToken = '';
+  static const _userToken = 'YOUR_TOKEN_HERE';
 
   PermissionStatus _locationStatus = PermissionStatus.denied;
   PermissionRequestResult _activityStatus = PermissionRequestResult.DENIED;
