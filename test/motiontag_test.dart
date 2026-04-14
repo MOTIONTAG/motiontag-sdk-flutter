@@ -204,6 +204,59 @@ void main() {
     }, timeout: defaultTimeout);
   });
 
+  group('calling isPowerSaveModeEnabled method', () {
+    testWidgets('should return value using channel on Android', (tester) async {
+      debugDefaultTargetPlatformOverride = TargetPlatform.android;
+      channelMock.mockMethod('isPowerSaveModeEnabled', returnValues: [true]);
+
+      final result = await motionTag.isPowerSaveModeEnabled();
+
+      var calls = channelMock.methodCalls;
+      expect(calls.length, 1);
+      expect(calls.first.method, 'isPowerSaveModeEnabled');
+      expect(result, true);
+      debugDefaultTargetPlatformOverride = null;
+    }, timeout: defaultTimeout);
+
+    testWidgets('should return false and not invoke channel on iOS',
+        (tester) async {
+      debugDefaultTargetPlatformOverride = TargetPlatform.iOS;
+
+      final result = await motionTag.isPowerSaveModeEnabled();
+
+      expect(channelMock.methodCalls, isEmpty);
+      expect(result, false);
+      debugDefaultTargetPlatformOverride = null;
+    }, timeout: defaultTimeout);
+  });
+
+  group('calling isBatteryOptimizationsEnabled method', () {
+    testWidgets('should return value using channel on Android', (tester) async {
+      debugDefaultTargetPlatformOverride = TargetPlatform.android;
+      channelMock
+          .mockMethod('isBatteryOptimizationsEnabled', returnValues: [true]);
+
+      final result = await motionTag.isBatteryOptimizationsEnabled();
+
+      var calls = channelMock.methodCalls;
+      expect(calls.length, 1);
+      expect(calls.first.method, 'isBatteryOptimizationsEnabled');
+      expect(result, true);
+      debugDefaultTargetPlatformOverride = null;
+    }, timeout: defaultTimeout);
+
+    testWidgets('should return false and not invoke channel on iOS',
+        (tester) async {
+      debugDefaultTargetPlatformOverride = TargetPlatform.iOS;
+
+      final result = await motionTag.isBatteryOptimizationsEnabled();
+
+      expect(channelMock.methodCalls, isEmpty);
+      expect(result, false);
+      debugDefaultTargetPlatformOverride = null;
+    }, timeout: defaultTimeout);
+  });
+
   group('onEvent invocation with', () {
     testWidgets('unknown type should not call registered observer',
         (tester) async {

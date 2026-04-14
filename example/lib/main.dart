@@ -1,47 +1,59 @@
 import 'package:flutter/material.dart';
-import 'package:motiontag_sdk_example/controls.dart';
-import 'package:motiontag_sdk_example/logs.dart';
-import 'package:motiontag_sdk_example/status.dart';
+import 'package:motiontag_sdk/motiontag.dart';
+import 'package:permission_handler/permission_handler.dart';
 
-void main() {
-  runApp(App());
-}
+import 'onboarding_screen.dart';
+import 'main_screen.dart';
 
-class App extends StatelessWidget {
+void main() => runApp(const MotionTagApp());
+
+class MotionTagApp extends StatelessWidget {
+  const MotionTagApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('MOTIONTAG SDK example'),
-        ),
-        body: SizedBox.expand(
-          child: Padding(
-            padding: EdgeInsets.all(10),
-            child: Column(
-              children: [
-                Status(),
-                Divider(
-                  color: Colors.black,
-                ),
-                Expanded(
-                  child: SizedBox(
-                    width: double.infinity,
-                    child: Logs(),
-                  ),
-                ),
-                Divider(
-                  color: Colors.black,
-                ),
-                SizedBox(
-                  width: double.infinity,
-                  child: Controls(),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
+      title: 'motiontag SDK flutter example app',
+      theme: ThemeData(colorSchemeSeed: Colors.blue, useMaterial3: true),
+      home: const AppRouter(),
     );
+  }
+}
+
+class AppRouter extends StatefulWidget {
+  const AppRouter({super.key});
+
+  @override
+  State<AppRouter> createState() => _AppRouterState();
+}
+
+class _AppRouterState extends State<AppRouter> {
+  bool? _onboardingComplete;
+
+  @override
+  void initState() {
+    super.initState();
+    _checkOnboarding();
+  }
+
+  Future<void> _checkOnboarding() async {
+    final token = await MotionTag.instance.getUserToken();
+    final locationGranted = await Permission.locationAlways.isGranted;
+    if (mounted) {
+      setState(() => _onboardingComplete =
+          token != null && token.isNotEmpty && locationGranted);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (_onboardingComplete == null) {
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
+    }
+    if (_onboardingComplete!) {
+      return const MainScreen();
+    }
+    return OnboardingScreen(
+        onComplete: () => setState(() => _onboardingComplete = true));
   }
 }
