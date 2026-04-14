@@ -119,7 +119,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               SizedBox(
                 width: double.infinity,
                 child: FilledButton(
-                  onPressed: _locationStatus.isGranted ? _getStarted : null,
+                  onPressed: _locationStatus.isGranted && _activityStatus == PermissionRequestResult.GRANTED ? _getStarted : null,
                   child: const Padding(
                     padding: EdgeInsets.symmetric(vertical: 12),
                     child: Text('Get Started', style: TextStyle(fontSize: 16)),
