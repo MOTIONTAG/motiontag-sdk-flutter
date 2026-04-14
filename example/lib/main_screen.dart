@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:motiontag_sdk/motiontag.dart';
+import 'package:motiontag_sdk/events/motiontag_event.dart';
 import 'package:motiontag_sdk/events/started_event.dart';
 import 'package:motiontag_sdk/events/stopped_event.dart';
 
@@ -41,7 +42,7 @@ class _MainScreenState extends State<MainScreen> {
     }
   }
 
-  void _onEvent(event) {
+  void _onEvent(MotionTagEvent event) {
     setState(() {
       if (event is StartedEvent) {
         _isTracking = true;

@@ -19,7 +19,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   static const _userToken = 'YOUR_TOKEN_HERE';
 
   PermissionStatus _locationStatus = PermissionStatus.denied;
-  PermissionRequestResult _activityStatus = PermissionRequestResult.DENIED;
+  ActivityPermission _activityStatus = ActivityPermission.DENIED;
 
   @override
   void initState() {
@@ -30,7 +30,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   Future<void> _refreshPermissions() async {
     final location = await Permission.locationAlways.status;
     final activity = Platform.isIOS
-        ? PermissionRequestResult.DENIED
+        ? ActivityPermission.DENIED
         : await FlutterActivityRecognition.instance.checkPermission();
     if (mounted) {
       setState(() {
@@ -112,7 +112,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 icon: Icons.directions_run,
                 label: 'Motion Activity',
                 subtitle: 'Required for detecting transport mode',
-                status: _activityStatus == PermissionRequestResult.GRANTED
+                status: _activityStatus == ActivityPermission.GRANTED
                     ? PermissionStatus.granted
                     : PermissionStatus.denied,
                 onTap: _requestActivity,
@@ -122,7 +122,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 width: double.infinity,
                 child: FilledButton(
                   onPressed: _locationStatus.isGranted &&
-                          _activityStatus == PermissionRequestResult.GRANTED
+                          _activityStatus == ActivityPermission.GRANTED
                       ? _getStarted
                       : null,
                   child: const Padding(

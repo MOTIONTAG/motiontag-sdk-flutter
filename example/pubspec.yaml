@@ -20,7 +20,7 @@ dependencies:
     path: ../
   cupertino_icons: ^1.0.5
   permission_handler: ^12.0.1
-  flutter_activity_recognition: ^2.0.0
+  flutter_activity_recognition: ^4.0.0
   toggle_switch: ^2.1.0
 
 dev_dependencies:
