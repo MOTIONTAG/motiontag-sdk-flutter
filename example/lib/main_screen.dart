@@ -83,8 +83,9 @@ class _MainScreenState extends State<MainScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: const Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text('motiontag SDK', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
             Text('flutter example app', style: TextStyle(fontSize: 12)),
