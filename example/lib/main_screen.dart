@@ -220,7 +220,7 @@ class _ToggleCard extends StatelessWidget {
         title: Text(label, style: const TextStyle(fontWeight: FontWeight.w600)),
         value: value,
         onChanged: onChanged,
-        activeColor: activeColor,
+        activeThumbColor: activeColor,
         contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       ),
     );
