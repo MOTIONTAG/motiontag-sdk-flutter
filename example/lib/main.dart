@@ -13,7 +13,7 @@ class MotionTagApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'motiontag',
+      title: 'motiontag SDK flutter example app',
       theme: ThemeData(colorSchemeSeed: Colors.blue, useMaterial3: true),
       home: const AppRouter(),
     );

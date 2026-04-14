@@ -6,11 +6,12 @@ plugins {
 
 android {
     namespace "de.motiontag.motiontag_sdk_example"
-    compileSdkVersion 34
+    compileSdk = 36
+    ndkVersion = "28.2.13676358"
 
     defaultConfig {
         applicationId "de.motiontag.motiontag_sdk_example"
-        minSdkVersion 23
+        minSdkVersion flutter.minSdkVersion
         targetSdkVersion 35
         versionCode 1
         versionName "1.0"

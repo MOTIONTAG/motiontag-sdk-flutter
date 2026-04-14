@@ -72,7 +72,15 @@ class _MainScreenState extends State<MainScreen> {
     final scheme = Theme.of(context).colorScheme;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('motiontag')),
+      appBar: AppBar(
+        title: const Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('motiontag SDK', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+            Text('flutter example app', style: TextStyle(fontSize: 12)),
+          ],
+        ),
+      ),
       body: SafeArea(
         top: false,
         child: Padding(
@@ -84,26 +92,26 @@ class _MainScreenState extends State<MainScreen> {
               // Tracking status card
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.all(32),
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 decoration: BoxDecoration(
                   color: scheme.surfaceContainerHighest,
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(12),
                 ),
-                child: Column(
+                child: Row(
                   children: [
                     AnimatedSwitcher(
                       duration: const Duration(milliseconds: 300),
                       child: Icon(
                         _isTracking ? Icons.location_on : Icons.location_off,
                         key: ValueKey(_isTracking),
-                        size: 60,
+                        size: 24,
                         color: _isTracking ? Colors.green : Colors.grey,
                       ),
                     ),
-                    const SizedBox(height: 12),
+                    const SizedBox(width: 16),
                     Text(
                       _isTracking ? 'Tracking Active' : 'Tracking Inactive',
-                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.w600,
                         color: _isTracking ? null : Colors.grey,
                       ),
