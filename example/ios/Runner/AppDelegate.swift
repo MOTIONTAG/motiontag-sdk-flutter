@@ -3,6 +3,7 @@ import Flutter
 import MotionTagSDK
 import motiontag_sdk
 
+@main
 @objc class AppDelegate: FlutterAppDelegate, FlutterImplicitEngineDelegate {
 
     override func application(
