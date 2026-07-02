@@ -10,19 +10,15 @@ import motiontag_sdk
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
     ) -> Bool {
-        MotionTagCore.sharedInstance.initialize(using: MotionTagDelegateWrapper.sharedInstance, launchOption: launchOptions)
+        MotionTagCore.sharedInstance.initialize(using: MotionTagDelegateWrapper.sharedInstance, launchOptions: launchOptions)
         return super.application(application, didFinishLaunchingWithOptions: launchOptions)
     }
 
     func didInitializeImplicitFlutterEngine(_ engineBridge: any FlutterImplicitEngineBridge) {
         GeneratedPluginRegistrant.register(with: engineBridge.pluginRegistry)
     }
-
-    override func application(
-        _ application: UIApplication,
-        handleEventsForBackgroundURLSession identifier: String,
-        completionHandler: @escaping () -> Void
-    ) {
-        MotionTagCore.sharedInstance.processBackgroundSessionEvents(with: identifier, completionHandler: completionHandler)
+    
+    override func application(_ application: UIApplication, handleEventsForBackgroundURLSession identifier: String) async {
+        await MotionTagCore.sharedInstance.processBackgroundSessionEvents(with: identifier)
     }
 }
