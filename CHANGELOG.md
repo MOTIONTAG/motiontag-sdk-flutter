@@ -1,5 +1,9 @@
 # motiontag SDK Flutter Plugin changelog
 
+## Version 0.2.8 *(2026-07-02)*
+
+- Update motiontag iOS SDK to 7.0.0 with Swift 6 support
+
 ## Version 0.2.7 *(2026-04-02)*
 
 - Use motiontag iOS SDK 6.5.0 
