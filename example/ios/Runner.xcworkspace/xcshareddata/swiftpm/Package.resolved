@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "motiontag-sdk-ios-releases",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/MOTIONTAG/motiontag-sdk-ios-releases.git",
+      "state" : {
+        "revision" : "59ff8fd59a9021ca1cc0ebacd2b803c3f4010f79",
+        "version" : "7.0.0"
+      }
+    }
+  ],
+  "version" : 2
+}

@@ -2,33 +2,20 @@ PODS:
   - Flutter (1.0.0)
   - flutter_activity_recognition (0.0.1):
     - Flutter
-  - motiontag_sdk (0.2.8):
-    - Flutter
-    - MotionTagSDK (= 7.0.0)
-  - MotionTagSDK (7.0.0)
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
   - flutter_activity_recognition (from `.symlinks/plugins/flutter_activity_recognition/ios`)
-  - motiontag_sdk (from `.symlinks/plugins/motiontag_sdk/ios`)
-
-SPEC REPOS:
-  trunk:
-    - MotionTagSDK
 
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
   flutter_activity_recognition:
     :path: ".symlinks/plugins/flutter_activity_recognition/ios"
-  motiontag_sdk:
-    :path: ".symlinks/plugins/motiontag_sdk/ios"
 
 SPEC CHECKSUMS:
   Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
   flutter_activity_recognition: 52dfad4c1e9cec99f0841b3ed0efcc9d424b3deb
-  motiontag_sdk: 67dd5851b4bdcb36d81fc9a463a2f7ba9265ac10
-  MotionTagSDK: 4dd410b7535b2aee78c82667822bc73c63302641
 
 PODFILE CHECKSUM: 85e7a505d96657e2553b17318b1193736ecf4b44
 

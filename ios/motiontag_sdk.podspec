@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
   s.license          = { :file => '../LICENSE' }
   s.author           = { 'MOTIONTAG GmbH' => 'info@motion-tag.com' }
   s.source           = { :path => '.' }
-  s.source_files = 'Classes/**/*'
+  s.source_files = 'motiontag_sdk/Sources/motiontag_sdk/**/*'
   s.dependency 'Flutter'
   s.platform = :ios, '13.0'
 

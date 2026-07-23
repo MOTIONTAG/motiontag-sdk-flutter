@@ -16,6 +16,7 @@ let package = Package(
     ],
     dependencies: [
         .package(name: "integration_test", path: "../.packages/integration_test"),
+        .package(name: "motiontag_sdk", path: "../.packages/motiontag-sdk-flutter"),
         .package(name: "permission_handler_apple", path: "../.packages/permission_handler_apple-9.4.10"),
         .package(name: "FlutterFramework", path: "../.packages/FlutterFramework")
     ],
@@ -24,6 +25,7 @@ let package = Package(
             name: "FlutterGeneratedPluginSwiftPackage",
             dependencies: [
                 .product(name: "integration-test", package: "integration_test"),
+                .product(name: "motiontag-sdk", package: "motiontag_sdk"),
                 .product(name: "permission-handler-apple", package: "permission_handler_apple"),
                 .product(name: "FlutterFramework", package: "FlutterFramework")
             ]
