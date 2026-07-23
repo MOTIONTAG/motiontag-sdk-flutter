@@ -1,5 +1,9 @@
 # motiontag SDK Flutter Plugin changelog
 
+## Version 0.3.0 *(2026-07-23)*
+
+- Add Swift Package Manager support alongside CocoaPods for iOS
+
 ## Version 0.2.8 *(2026-07-02)*
 
 - Update motiontag iOS SDK to 7.0.0 with Swift 6 support

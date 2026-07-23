@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'motiontag_sdk'
-  s.version          = '0.2.8'
+  s.version          = '0.3.0'
   s.summary          = 'Flutter wrapper for the MOTIONTAG SDK'
   s.description      = 'Flutter wrapper for the MOTIONTAG SDK'
   s.homepage         = 'https://github.com/MOTIONTAG/motiontag-sdk-flutter#readme'
