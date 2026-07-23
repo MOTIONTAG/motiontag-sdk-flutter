@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
   s.description      = 'Flutter wrapper for the MOTIONTAG SDK'
   s.homepage         = 'https://github.com/MOTIONTAG/motiontag-sdk-flutter#readme'
   s.license          = { :file => '../LICENSE' }
-  s.author           = { 'MOTIONTAG GmbH' => 'info@motion-tag.com' }
+  s.author           = { 'MOTIONTAG GmbH' => 'info@motiontag.com' }
   s.source           = { :path => '.' }
   s.source_files = 'motiontag_sdk/Sources/motiontag_sdk/**/*'
   s.dependency 'Flutter'
