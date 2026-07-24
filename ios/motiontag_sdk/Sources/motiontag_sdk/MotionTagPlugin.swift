@@ -3,7 +3,7 @@ import UIKit
 import CoreLocation
 import MotionTagSDK
 
-public class SwiftMotionTagPlugin: NSObject, FlutterPlugin {
+public class MotionTagPlugin: NSObject, FlutterPlugin {
 
     private var channel: FlutterMethodChannel
 
@@ -14,7 +14,7 @@ public class SwiftMotionTagPlugin: NSObject, FlutterPlugin {
 
     public static func register(with registrar: FlutterPluginRegistrar) {
         let channel = FlutterMethodChannel(name: "de.motiontag.tracker", binaryMessenger: registrar.messenger())
-        let instance = SwiftMotionTagPlugin(channel: channel)
+        let instance = MotionTagPlugin(channel: channel)
         MainActor.assumeIsolated {
             MotionTagDelegateWrapper.sharedInstance.channel = channel
         }

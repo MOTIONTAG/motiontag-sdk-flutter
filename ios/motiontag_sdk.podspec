@@ -4,14 +4,14 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'motiontag_sdk'
-  s.version          = '0.2.8'
+  s.version          = '0.3.0'
   s.summary          = 'Flutter wrapper for the MOTIONTAG SDK'
   s.description      = 'Flutter wrapper for the MOTIONTAG SDK'
   s.homepage         = 'https://github.com/MOTIONTAG/motiontag-sdk-flutter#readme'
   s.license          = { :file => '../LICENSE' }
-  s.author           = { 'MOTIONTAG GmbH' => 'info@motion-tag.com' }
+  s.author           = { 'MOTIONTAG GmbH' => 'info@motiontag.com' }
   s.source           = { :path => '.' }
-  s.source_files = 'Classes/**/*'
+  s.source_files = 'motiontag_sdk/Sources/motiontag_sdk/**/*'
   s.dependency 'Flutter'
   s.platform = :ios, '13.0'
 
