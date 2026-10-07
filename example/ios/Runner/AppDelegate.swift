@@ -10,7 +10,11 @@ import motiontag_sdk
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
     ) -> Bool {
-        MotionTagCore.sharedInstance.initialize(using: MotionTagDelegateWrapper.sharedInstance, launchOptions: launchOptions)
+        do {
+            try MotionTagCore.sharedInstance.initialize(using: MotionTagDelegateWrapper.sharedInstance, launchOptions: launchOptions)
+        } catch {
+            NSLog("MotionTag SDK initialization failed: \(error.localizedDescription)")
+        }
         return super.application(application, didFinishLaunchingWithOptions: launchOptions)
     }
 

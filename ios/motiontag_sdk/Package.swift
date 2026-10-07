@@ -11,7 +11,7 @@ let package = Package(
     ],
     dependencies: [
         .package(name: "FlutterFramework", path: "../FlutterFramework"),
-        .package(url: "https://github.com/MOTIONTAG/motiontag-sdk-ios-releases.git", exact: "7.0.0")
+        .package(url: "https://github.com/MOTIONTAG/motiontag-sdk-ios-releases.git", exact: "8.1.2")
     ],
     targets: [
         .target(

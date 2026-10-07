@@ -1,5 +1,9 @@
 # motiontag SDK Flutter Plugin changelog
 
+## Version 0.3.1 *(2026-10-07)*
+
+- Update motiontag iOS SDK to 8.1.2. `MotionTagCore.initialize(using:launchOptions:)` now throws; call it with `try` in your `AppDelegate`
+
 ## Version 0.3.0 *(2026-07-23)*
 
 - Add Swift Package Manager support alongside CocoaPods for iOS

@@ -41,6 +41,7 @@ First, add `motiontag_sdk` as a [dependency in your pubspec.yaml file](https://d
 ### iOS
 
 The SDK must be initialized **before** the plugin registration in the `didFinishLaunchingWithOptions` application's delegate function.
+`initialize(using:launchOptions:)` throws a `MotionTagInitializationError` if the SDK cannot be set up, so call it with `try` and handle the error.
 The `handleEventsForBackgroundURLSession` calls must be forwarded by overriding the appropriate delegate.
 Check out [AppDelegate.swift](https://github.com/MOTIONTAG/motiontag-sdk-flutter/blob/main/example/ios/Runner/AppDelegate.swift) as an example.
 
